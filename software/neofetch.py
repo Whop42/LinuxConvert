@@ -7,7 +7,7 @@ class neofetch(Software):
         super(Software, self).__init__("neofetch")
     
     def install(self):
-        cmd("dpkg -i neofetch -y")
+        cmd("apt install neofetch -y")
     
     def uninstall(self):
-        cmd("dpkg -remove neofetch")
+        cmd("apt remove neofetch")
