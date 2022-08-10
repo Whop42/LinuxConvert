@@ -1,0 +1,13 @@
+{
+    "original_os": "", // win7, win10, win11, mac
+    "personalization": {
+        "background_image": "",
+        "lockscreen_image": "",
+        "panel_position": "", // top, right, bottom, left
+        "panel_applications": [ // list of "pinned" applications
+            "example",
+            "other" 
+        ],
+        "accent_color": "#ffffff" // accent color hex
+    }
+}
