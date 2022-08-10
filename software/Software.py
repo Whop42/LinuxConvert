@@ -8,6 +8,8 @@ class Software:
     note: sets installed status to False as default
     """
 
+    name = ""
+
     def __init__(self, name):
         self.name = name
         #installed status

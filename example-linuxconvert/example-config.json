@@ -1,0 +1,13 @@
+{
+    "original_os": "win10",
+    "personalization": {
+        "background_image": "https://placekitten.com/1920/1080",
+        "lockscreen_image": "https://placekitten.com/1921/1081",
+        "panel_position": "left",
+        "panel_applications": [
+            "example",
+            "other" 
+        ],
+        "accent_color": "#ffffff"
+    }
+}
