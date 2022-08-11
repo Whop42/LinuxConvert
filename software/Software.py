@@ -37,3 +37,6 @@ class Software:
         """
 
         return False
+
+    def get_name(self):
+        return self.name

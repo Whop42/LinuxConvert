@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-from software import neofetch
+from software import neofetch, example
 
 applications = []
 config = {}
@@ -9,6 +9,7 @@ softwares = []
 
 #initialize software
 softwares.append(neofetch.neofetch())
+softwares.append(example.example())
 
 def load_files(path):
     for filename in os.listdir(path):
@@ -35,8 +36,10 @@ def load_files(path):
 
 def install(name):
     for software in softwares:
+        print(software.name)
         if software.name == applications[0]:
             software.install()
         
 
 load_files(os.getcwd())
+install("example_application")
