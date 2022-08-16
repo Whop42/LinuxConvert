@@ -3,6 +3,8 @@ import sys
 import json
 from software import neofetch, example
 
+debug = True
+
 applications = []
 config = {}
 softwares = []
@@ -33,13 +35,29 @@ def load_files(path):
                     config_file.close()
     # print(applications)
     # print(config)
+    return config
 
 def install(name):
     for software in softwares:
-        print(software.name)
-        if software.name == applications[0]:
-            software.install()
+        if software.name == name:
+            if software.check_install():
+                return
+            print("Installing " + software.name + "...")
+            output = software.install()
+            software.create_desktop(os.getcwd() + str(software.name) + ".desktop")
+            if debug:
+                print(output) 
         
+def install_from_list():
+    for application in applications:
+        install(application[1])
 
-load_files(os.getcwd())
-install("example_application")
+def install_basics():
+    basics = [
+        "neofetch", #rice gang
+        "python",
+
+    ]
+
+    for software in basics:
+        install(software)

@@ -1,3 +1,5 @@
+import subprocess
+
 class Software:
     """
     the base class for each software script supported
@@ -14,6 +16,9 @@ class Software:
         self.name = name
         #installed status
         self.status = check_install()
+        self.run_cmd = ""
+        self.generic_name = name
+        self.icon = ""
 
     def install(self):
         """
@@ -40,3 +45,27 @@ class Software:
 
     def get_name(self):
         return self.name
+    
+    def run(self):
+        """
+        runs the application
+        """
+        
+        output = subprocess.run(self.run_cmd, stdout=subprocess.PIPE)
+        print(output)
+    
+    def create_desktop(self, path):
+        """
+        creates a .desktop file for the installed application
+        """
+        output = "[Desktop Entry]\n"
+        + "Type=Application\n"
+        + "Name=" + self.name + "\n"
+        + "GenericName=" + self.generic_name + "\n"
+        + "Icon=" + self.icon + "\n"
+        + "Exec=" + self.run_cmd + "\n"
+        + "Terminal=false"
+
+        f = open(path, "w")
+        f.write(output)
+        f.close()

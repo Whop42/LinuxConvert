@@ -1,15 +1,22 @@
 from software import Software
-from os import system as cmd
+import subprocess
 
 class example(Software.Software):
     
     def __init__(self):
         super(Software.Software, self).__init__()
-        self.name = "example_application"
+        self.name = "example"
+
+        self.installed = False
     
     def install(self):
-        cmd("echo 'example installed'")
-        print(self.name)
+        output = subprocess.run(["sudo", "pacman", "-Sy", "cmatrix"], stdout=subprocess.PIPE)
+        #if it fails, return error
+        return output.stdout
     
     def uninstall(self):
-        cmd("echo 'example uninstalled'")
+        output = subprocess.run(["echo", "'example uninstalled'"], stdout=subprocess.PIPE)
+        return output.stdout
+    
+    def check_install(self):
+        return self.installed
