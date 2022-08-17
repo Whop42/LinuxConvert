@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-from software import neofetch, example
+from software import neofetch, flameshot
 
 debug = True
 
@@ -11,7 +11,7 @@ softwares = []
 
 #initialize software
 softwares.append(neofetch.neofetch())
-softwares.append(example.example())
+softwares.append(flameshot.flameshot())
 
 def load_files(path):
     for filename in os.listdir(path):
@@ -41,6 +41,7 @@ def install(name):
     for software in softwares:
         if software.name == name:
             if software.check_install():
+                print(software.name + " is already installed. Skipping...")
                 return
             print("Installing " + software.name + "...")
             output = software.install()
@@ -53,10 +54,11 @@ def install_from_list():
         install(application[1])
 
 def install_basics():
-    basics = [
-        "neofetch", #rice gang
-        "python",
+    print("Installing basic applications...")
 
+    basics = [
+        "neofetch", # because you can't show off linux without neofetch
+        "flameshot" # screenshot utility
     ]
 
     for software in basics:

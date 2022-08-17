@@ -17,8 +17,26 @@ class Software:
         #installed status
         self.status = check_install()
         self.run_cmd = ""
-        self.generic_name = name
+        self.generic_name = self.name
         self.icon = ""
+
+    def cmd(self, command, sudo=True):
+        if sudo:
+            command.insert(0, "sudo")
+        output = subprocess.run(command, stdout=subprocess.PIPE)
+        return str(output.stdout)
+    
+    def install_package(self, pkg):
+        return self.cmd(["pacman", "-Sy", "--noconfirm", "--asdeps", str(pkg)])
+    
+    def remove_package(self, pkg):
+        return self.cmd(["pacman", "-R", "--noconfirm", str(pkg)])
+    
+    def query_package(self, pkg):
+        output = self.cmd(["pacman", "-Q", str(pkg)])
+        if pkg in output and "error" not in output:
+            return True
+        return False
 
     def install(self):
         """
@@ -58,13 +76,7 @@ class Software:
         """
         creates a .desktop file for the installed application
         """
-        output = "[Desktop Entry]\n"
-        + "Type=Application\n"
-        + "Name=" + self.name + "\n"
-        + "GenericName=" + self.generic_name + "\n"
-        + "Icon=" + self.icon + "\n"
-        + "Exec=" + self.run_cmd + "\n"
-        + "Terminal=false"
+        output = "[Desktop Entry]\n" + "Type=Application\n" + "Name=" + self.name + "\n" + "GenericName=" + self.generic_name + "\n" + "Icon=" + self.icon + "\n" + "Exec=" + self.run_cmd + "\n" + "Terminal=false"
 
         f = open(path, "w")
         f.write(output)

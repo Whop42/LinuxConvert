@@ -1,15 +1,20 @@
 from software import Software
-from os import system as cmd
 
 class neofetch(Software.Software):
     
     def __init__(self):
         super(Software.Software, self).__init__()
         self.name = "neofetch"
+
+        self.run_cmd = "neofetch"
+        self.generic_name = "screenfetch"
+        self.icon = "screengrab"
     
     def install(self):
-        cmd("apt install neofetch -y")
-        print(1)
+        print(self.install_package("neofetch"))
     
     def uninstall(self):
-        cmd("apt remove neofetch")
+        print(self.remove_package("neofetch"))
+    
+    def check_install(self):
+        return self.query_package("neofetch")
