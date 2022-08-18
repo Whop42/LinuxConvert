@@ -11,10 +11,10 @@ class neofetch(Software.Software):
         self.icon = "screengrab"
     
     def install(self):
-        print(self.install_package("neofetch"))
+        return self.install_package("neofetch")
     
     def uninstall(self):
-        print(self.remove_package("neofetch"))
+        return self.remove_package("neofetch")
     
     def check_install(self):
         return self.query_package("neofetch")

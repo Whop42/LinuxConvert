@@ -1,4 +1,5 @@
 from software import Software
+import os
 
 class flameshot(Software.Software):
     
@@ -11,10 +12,11 @@ class flameshot(Software.Software):
         self.icon = "screengrab"
     
     def install(self):
-        print(self.install_package("flameshot"))
+        return self.install_package("flameshot")
+
     
     def uninstall(self):
-        print(self.remove_package("flameshot"))
+        return self.remove_package("flameshot")
     
     def check_install(self):
         return self.query_package("flameshot")

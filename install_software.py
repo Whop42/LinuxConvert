@@ -47,7 +47,8 @@ def install(name):
             output = software.install()
             software.create_desktop(os.getcwd() + str(software.name) + ".desktop")
             if debug:
-                print(output) 
+                print(output)
+            print(name + " installed.")
         
 def install_from_list():
     for application in applications:
