@@ -1,4 +1,6 @@
 import subprocess
+import utils
+import shutil
 
 class Software:
     """
@@ -81,3 +83,26 @@ class Software:
         f = open(path, "w")
         f.write(output)
         f.close()
+    
+    def get_folder(self):
+        """
+        returns full path of application folder
+        """
+
+        return utils.locate_application_path(self.name)
+    
+    def move_configs(self, dest):
+        """
+        move configs from this application's config
+        folder to the dir "dest"
+
+        WARNING: UNTESTED
+        TODO: test this
+        """
+        output = []
+        config_folder = os.path.join(self.get_folder(), "config")
+        for f in os.listdir(config_folder):
+            shutil.copy(os.path.join(config_folder, f), os.path.join(dest, f))
+            output.append("Moving %s to %s" % (f, os.path.join(dest, f)))
+        output.append("Moved config files from %s to %s" % (self.name, dest))
+        return output
