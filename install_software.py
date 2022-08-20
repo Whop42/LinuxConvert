@@ -2,6 +2,8 @@ import os
 import sys
 import json
 from software import neofetch, flameshot
+import utils
+import shutil
 
 debug = True
 
@@ -36,6 +38,17 @@ def load_files(path):
     # print(applications)
     # print(config)
     return config
+
+def copy_backups():
+    """
+    copies *all* files in *-linuxconvert/file_backups to ~
+
+    WARNING: not tested
+    """
+
+    for f in utils.locate_backup_folder():
+        shutil.copy(f, os.path.join("~", f))
+
 
 def install(name):
     for software in softwares:

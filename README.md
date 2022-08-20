@@ -38,7 +38,7 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
 ## Roadmap
 
 - [x] Proof-of-concept for installing applications from config
-- [ ] Move documents/pictures/etc
+- [X] Move documents/pictures/etc
 - [ ] Windows application
 - [ ] MacOS application
 - [ ] Theme XFCE to appear similar to original OS, along with personalization settings

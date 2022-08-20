@@ -17,9 +17,7 @@ config = install_software.load_files(os.getcwd())
 def win10(conf):
     #install win10 lookalike theme
 
-    #set taskbar location
-
-    #add applications to taskbar
+    #move/add launchers to taskbar/panel
 
     #set background image
 
@@ -27,4 +25,5 @@ def win10(conf):
     pass
 
 install_software.install_basics()
+install_software.copy_backups()
 install_software.install_from_list()
