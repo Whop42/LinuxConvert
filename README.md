@@ -15,24 +15,31 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
 
 ### Linux:
 
-- Create a vm of the latest release of EndeavourOS with the offline install
-- Update the system
+- Create a vm of the latest release of EndeavourOS with the offline install option
+- Update the system (`yay -Syyu && sudo grub-install`) <!-- delete this after the grub issue fixed -->
 - Clone this repository
+- See below running
 
 ### Windows/Mac:
 
 - Clone this repository
-- Good luck
+- See below for running
 
 ## Running
 
 ### Linux side:
 
-`sudo python linux_setup.py`
+`sudo python linux_setup.py` in the directory with the config folder
 
 ### Windows/Mac side:
 
-- No windows/mac side (yet)
+#### Windows:
+
+`python windows<release number (10,11)>_setup.py` in the directory where you want the config folder to generate
+
+#### Mac:
+
+not yet
 
 ---
 ## Roadmap
@@ -40,7 +47,15 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
 - [x] Proof-of-concept for installing applications from config
 - [X] Move documents/pictures/etc
 - [ ] Windows application
+    - [X] Create config folder + config file
+    - [X] Get system personalization options
+    - [ ] Update each Software to get windows configs
+    - [ ] Backup Documents, Pictures, etc.
 - [ ] MacOS application
+    - [ ] Create config folder + config file
+    - [ ] Get system personalization options
+    - [ ] Update each Software to get macOS configs
+    - [ ] Backup Documents, Pictures, etc.
 - [ ] Theme XFCE to appear similar to original OS, along with personalization settings
 - [ ] Create scripts to install popular applications w/configs
     - [ ] Firefox
