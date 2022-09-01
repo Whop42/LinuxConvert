@@ -53,7 +53,7 @@ def create_config(path):
     accent = accent[4:6] + accent[2:4] + accent[0:2]
 
     config = {
-        "original_os": "win10",  # win11 someday
+        "original_os": "win10",
         "personalization": {
             "theme_mode": theme_color,
             "background_image": "background.jpg",
@@ -74,9 +74,9 @@ def main():
         print("Not running on windows. Stopping...")
         return
 
-    conf_path = os.path.join(os.getcwd(), "windows-linuxconvert")
+    conf_path = os.path.join(os.getcwd(), "windows10-linuxconvert")
 
-    create_config(os.path.join(os.getcwd(), "windows-linuxconvert"))
+    create_config(os.path.join(os.getcwd(), "windows10-linuxconvert"))
     get_application_list(os.path)
 
 if __name__ == "__main__":
