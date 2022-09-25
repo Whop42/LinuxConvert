@@ -1,4 +1,5 @@
 import os
+from software import *
 
 def locate_application_path(name):
     """
@@ -26,3 +27,12 @@ def locate_backup_folder():
     for filename in os.listdir(os.getcwd()):
         if "-linuxconvert" in filename:
             return os.path.join(os.get_cwd(), "file_backups")
+
+def get_softwares():
+    output = []
+
+    output.append(neofetch.neofetch())
+    output.append(flameshot.flameshot())
+    output.append(vscode.vscode())
+
+    return output

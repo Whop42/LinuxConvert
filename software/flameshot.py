@@ -20,3 +20,11 @@ class flameshot(Software.Software):
     
     def check_install(self):
         return self.query_package("flameshot")
+
+    def check_windows(self):
+        # screenshot util installed by default in windows
+        return True
+
+    def get_config_windows(self):
+        # screenshot util installed by default in windows
+        pass

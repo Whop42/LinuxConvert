@@ -51,6 +51,7 @@ not yet
     - [X] Get system personalization options
     - [ ] Update each Software to get windows configs
     - [ ] Backup Documents, Pictures, etc.
+        - [ ] Make each of them a software!! (i'm a genius lol)
 - [ ] MacOS application
     - [ ] Create config folder + config file
     - [ ] Get system personalization options

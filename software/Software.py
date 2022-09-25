@@ -1,20 +1,18 @@
 import subprocess
 import utils
 import shutil
+import json
 
 class Software:
     """
     the base class for each software script supported
-
-    params:
-        * name: name of software
 
     note: sets installed status to False as default
     """
 
     name = ""
 
-    def __init__(self, name):
+    def __init__(self):
         self.name = name
         #installed status
         self.status = check_install()
@@ -106,3 +104,40 @@ class Software:
             output.append("Moving %s to %s" % (f, os.path.join(dest, f)))
         output.append("Moved config files from %s to %s" % (self.name, dest))
         return output
+    
+    def check_windows(self):
+        """
+        Checks if the Software is installed on windows
+
+        Note: returns False by default
+        """
+        return False
+
+    def check_mac(self):
+        """
+        Checks if the Software is installed on macOS
+
+        Note: returns False by default
+        """
+
+
+        return False
+    
+    def get_config_windows(self):
+        """
+        copies windows config to utils.locate_application_path()
+        """
+
+
+        return False
+    
+    def get_config_mac(self):
+
+        return False
+    
+    def create_config():
+        f = open(os.path.join(utils.locate_application_path(self.name), "%s-application.json" % self.name), "w")
+        f.write(json.dumps({
+            "name": self.name
+        }))
+        f.close()

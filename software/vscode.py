@@ -1,5 +1,6 @@
 from software import Software
 import os
+import shutil
 
 class vscode(Software.Software):
     
@@ -17,7 +18,6 @@ class vscode(Software.Software):
         # move configs
         self.move_configs("~/.config/Code - OSS")
         
-
         return output
 
     
@@ -26,3 +26,11 @@ class vscode(Software.Software):
     
     def check_install(self):
         return self.query_package("code")
+    
+    def check_windows(self):
+        if shutil.which("code"):
+            return True
+        return False
+    
+    def get_config_windows(self):
+        pass

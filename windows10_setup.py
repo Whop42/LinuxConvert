@@ -8,11 +8,12 @@ from win32api import GetMonitorInfo, MonitorFromPoint
 from ctypes import windll
 import darkdetect
 from winreg import ConnectRegistry, OpenKey, QueryValueEx
+import utils
+import software.Software as sw
 
 # TODO: features:
 #   * create config folder + config
 #   * get system info for config
-#   - give each software a windows_config(conf_folder) function
 #   - go through each software and grab configs
 #   - file backups
 #   - compress config
@@ -64,10 +65,10 @@ def create_config(path):
         },
     }
 
-def get_application_list(conf_path):
-    apps = []
+def get_config_from_software(software):
 
-    for application in os.listdir(conf_path)
+    if software.check_windows():
+        software.get_config_windows()
 
 def main():
     if not "Windows" in platform.system():
@@ -78,6 +79,11 @@ def main():
 
     create_config(os.path.join(os.getcwd(), "windows10-linuxconvert"))
     get_application_list(os.path)
+
+    for s in utils.get_softwares():
+        get_config_from_software(s)
+
+
 
 if __name__ == "__main__":
     main()
