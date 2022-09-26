@@ -7,7 +7,7 @@ class neofetch(Software.Software):
         self.name = "neofetch"
 
         self.run_cmd = "neofetch"
-        self.generic_name = "screenfetch"
+        self.generic_name = "neofetch"
         self.icon = "screengrab"
     
     def install(self):
@@ -18,3 +18,11 @@ class neofetch(Software.Software):
     
     def check_install(self):
         return self.query_package("neofetch")
+
+    def check_windows(self):
+        # welcome to the rice fields, moth******er
+        return True
+
+    def get_config_windows(self):
+        # welcome to the rice fields, moth******er
+        pass

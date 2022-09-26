@@ -1,5 +1,7 @@
 import os
-from software import *
+from software import neofetch, flameshot, vscode
+
+debug = True
 
 def locate_application_path(name):
     """
@@ -36,3 +38,11 @@ def get_softwares():
     output.append(vscode.vscode())
 
     return output
+
+def dprint(message):
+    """
+    prints a debug message
+    """
+
+    if debug:
+        print("DEBUG: " + message)

@@ -2,6 +2,7 @@ import subprocess
 import utils
 import shutil
 import json
+import os
 
 class Software:
     """
@@ -10,12 +11,10 @@ class Software:
     note: sets installed status to False as default
     """
 
-    name = ""
-
     def __init__(self):
-        self.name = name
+        self.name = ""
         #installed status
-        self.status = check_install()
+        self.status = self.check_install()
         self.run_cmd = ""
         self.generic_name = self.name
         self.icon = ""
@@ -135,7 +134,7 @@ class Software:
 
         return False
     
-    def create_config():
+    def create_config(self):
         f = open(os.path.join(utils.locate_application_path(self.name), "%s-application.json" % self.name), "w")
         f.write(json.dumps({
             "name": self.name
