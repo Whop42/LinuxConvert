@@ -75,6 +75,8 @@ class Software:
         """
         creates a .desktop file for the installed application
         """
+        if self.name == "backups":
+            return
         output = "[Desktop Entry]\n" + "Type=Application\n" + "Name=" + self.name + "\n" + "GenericName=" + self.generic_name + "\n" + "Icon=" + self.icon + "\n" + "Exec=" + self.run_cmd + "\n" + "Terminal=false"
 
         f = open(path, "w")
@@ -111,26 +113,12 @@ class Software:
         Note: returns False by default
         """
         return False
-
-    def check_mac(self):
-        """
-        Checks if the Software is installed on macOS
-
-        Note: returns False by default
-        """
-
-
-        return False
     
     def get_config_windows(self):
         """
         copies windows config to utils.locate_application_path()
         """
 
-
-        return False
-    
-    def get_config_mac(self):
 
         return False
     

@@ -1,6 +1,8 @@
 ## PROJECT SPECIFIC ##
 example-linuxconvert/
+test-linuxconvert/
 test_stuff.py
+*.zip
 
 
 ######################

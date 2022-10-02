@@ -9,6 +9,7 @@ import darkdetect
 from winreg import ConnectRegistry, OpenKey, QueryValueEx, HKEY_CURRENT_USER
 from utils import dprint, get_softwares, locate_application_path, locate_backup_folder
 import software.Software as sw
+import time
 
 # TODO: features:
 #   * create config folder + config
@@ -63,11 +64,12 @@ def create_config(path):
         "personalization": {
             "theme_mode": theme_color,
             "background_image": "background.jpg",
-            "lockscreen_image": "https://betanews.com/wp-content/uploads/2015/09/Windows-10-lock-screen.jpg",  # TODO: find lockscreen image
+            "lockscreen_image": "https://betanews.com/wp-content/uploads/2015/09/Windows-10-lock-screen.jpg",
             "panel_position": panel_position,
             "panel_height": panel_height,
             "accent_color": "#" + str(accent),
         },
+        # TODO: taskbar items
     }
 
     conf_file.write(json.dumps(config))
@@ -93,9 +95,14 @@ def main():
     for s in get_softwares():
         get_config_from_software(s)
     
-    if debug:
-        shutil.rmtree(conf_path)
-        dprint(conf_path + " removed.")
+    zipfile = "windows10-linuxconvert-" + time.strftime("%m-%d-%H-%M-%S")
+    shutil._make_zipfile(zipfile, os.getcwd())
+
+    shutil.rmtree(conf_path)
+        
+    dprint(conf_path + " removed.")
+    print(f"File created: {os.getcwd() + zipfile}")
+    print("Complete!")
 
 
 

@@ -7,7 +7,7 @@
 > (CSRSEF Project)
 > WIP
 
-Creates a personalized linux setup from a windows or macOS setup, with minimal user interaction.
+Creates a personalized linux setup from a windows setup, with minimal user interaction.
 
 It's currently designed to install on EndeavourOS XFCE (offline install.)
 
@@ -18,9 +18,9 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
 - Create a vm of the latest release of EndeavourOS with the offline install option
 - Update the system (`yay -Syyu && sudo grub-install`) <!-- delete this after the grub issue fixed -->
 - Clone this repository
-- See below running
+- See below for running
 
-### Windows/Mac:
+### Windows:
 
 - Clone this repository
 - See below for running
@@ -31,15 +31,9 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
 
 `sudo python linux_setup.py` in the directory with the config folder
 
-### Windows/Mac side:
+### Windows side:
 
-#### Windows:
-
-`python windows<release number (10,11)>_setup.py` in the directory where you want the config folder to generate
-
-#### Mac:
-
-not yet
+`python windows10_setup.py` in the directory where you want the config folder to generate
 
 ---
 ## Roadmap
@@ -51,12 +45,7 @@ not yet
     - [X] Get system personalization options
     - [ ] Update each Software to get windows configs
     - [ ] Backup Documents, Pictures, etc.
-        - [ ] Make each of them a software!! (i'm a genius lol)
-- [ ] MacOS application
-    - [ ] Create config folder + config file
-    - [ ] Get system personalization options
-    - [ ] Update each Software to get macOS configs
-    - [ ] Backup Documents, Pictures, etc.
+        - [ ] Make each of them a software
 - [ ] Theme XFCE to appear similar to original OS, along with personalization settings
 - [ ] Create scripts to install popular applications w/configs
     - [ ] Firefox
@@ -64,11 +53,13 @@ not yet
     - [ ] Edge
     - [ ] VSCode
     - [ ] Office (LibreOffice or similar)
+        - [ ] Theme LibreOffice like MS Office
     - [ ] Zoom
     - [ ] Teams
     - [ ] Discord
     - [ ] OBS
     - [ ] Steam
-- [ ] Write documentation for creating scripts
+- [ ] Create GUI for install
 - [ ] Make website with instructions for install
-- [ ] Create scripts to install more applications (TODO: create list!)
+- [ ] Create scripts to install more applications
+    - [ ]  

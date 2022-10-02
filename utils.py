@@ -1,5 +1,6 @@
 import os
-from software import neofetch, flameshot, vscode
+import shutil
+from software import neofetch, flameshot, vscode, backups
 
 debug = True
 
@@ -22,20 +23,13 @@ def locate_application_path(name):
                 if application_folder == name:
                     return os.path.join(os.path.join(os.getcwd(), filename, "applications", application_folder))
 
-def locate_backup_folder():
-    """
-    returns file backup folder (contains Documents, Desktop, etc.)
-    """
-    for filename in os.listdir(os.getcwd()):
-        if "-linuxconvert" in filename:
-            return os.path.join(os.get_cwd(), "file_backups")
-
 def get_softwares():
     output = []
 
     output.append(neofetch.neofetch())
     output.append(flameshot.flameshot())
     output.append(vscode.vscode())
+    output.append(backups.backups())
 
     return output
 
@@ -46,3 +40,26 @@ def dprint(message):
 
     if debug:
         print("DEBUG: " + message)
+
+def eprint(message):
+    """
+    prints an error
+    """
+
+    if debug:
+        print("ERROR: " + message)
+
+def move_dirs_to_dir(dirs, output):
+    try:
+        os.mkdir(output)
+    except FileExistsError as e:
+        eprint(output + " already exists")
+        return False # it didn't work
+    
+    try:
+        for f in dirs:
+            shutil.copytree(f, os.path.join(output, f))
+    except FileNotFoundError as e:
+        eprint(e.strerror)
+        return False # it didn't work
+    return True # it worked

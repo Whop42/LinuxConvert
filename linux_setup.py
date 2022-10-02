@@ -1,8 +1,27 @@
 import subprocess
-import install_software
+from Install_Software import Install_Software
 import os
+import shutil
+import sys
+from utils import eprint, dprint
 
-config = install_software.load_files(os.getcwd())
+install_software = Install_Software()
+
+zipfile = sys.argv[1]
+
+if zipfile:
+    try:
+        shutil._unpack_zipfile(zipfile, os.getcwd())
+    except OSError as e:
+        eprint(str(e))
+        exit()
+    dprint("unzipped config folder")
+    config = install_software.load_files(zipfile.removesuffix(".zip"))
+    dprint("loaded config")
+    install_software.install_from_list()
+    print("LinuxConvert install completed!")
+
+
 # print(config)
 
 # if config["original_os"] == "win10":
@@ -11,8 +30,6 @@ config = install_software.load_files(os.getcwd())
 #     win11(config)
 # elif config["original_os"] == "win7":
 #     print("no windows 7 support yet :(")
-# elif config["original_os"] == "macOS":
-#     print("no macOS support yet :( (soon)")
 
 def win10(conf):
     #install win10 lookalike theme
@@ -24,6 +41,3 @@ def win10(conf):
     #set lockscreen image
     pass
 
-install_software.install_basics()
-install_software.copy_backups()
-install_software.install_from_list()
