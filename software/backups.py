@@ -24,7 +24,7 @@ class backups(Software.Software):
         return True
 
     def get_config_windows(self):
-        if utils.move_dirs_to_dir(["Documents", "Pictures", "Downloads"], "~/"):
+        if utils.move_dirs_to_dir(["Documents", "Pictures", "Downloads"], self.get_config_folder()):
             utils.dprint("moved backups")
         else:
             utils.eprint("failed to move backups")

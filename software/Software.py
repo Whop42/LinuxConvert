@@ -88,7 +88,13 @@ class Software:
         returns full path of application folder
         """
 
-        return utils.locate_application_path(self.name)
+        return os.path.join(os.getcwd(), utils.get_root_folder(), "applications", self.name)
+
+    def get_config_folder(self):
+        """
+        returns full path of application's config folder
+        """
+        return os.path.join(os.getcwd(), utils.get_root_folder(), "applications", self.name, "config")
     
     def move_configs(self, dest):
         """
@@ -119,12 +125,15 @@ class Software:
         copies windows config to utils.locate_application_path()
         """
 
-
         return False
     
     def create_config(self):
-        f = open(os.path.join(utils.locate_application_path(self.name), "%s-application.json" % self.name), "w")
+        os.mkdir(os.path.join(os.getcwd(), utils.get_root_folder(), "applications", self.name))
+        f = open(os.path.join(self.get_folder(), "%s-application.json" % self.name), "w")
         f.write(json.dumps({
             "name": self.name
         }))
         f.close()
+        utils.dprint("created application.json")
+
+        os.mkdir(self.get_config_folder())

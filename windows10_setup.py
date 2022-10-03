@@ -7,7 +7,7 @@ import shutil
 from win32api import GetMonitorInfo, MonitorFromPoint
 import darkdetect
 from winreg import ConnectRegistry, OpenKey, QueryValueEx, HKEY_CURRENT_USER
-from utils import dprint, get_softwares, locate_application_path, locate_backup_folder
+from utils import dprint, get_softwares, debug
 import software.Software as sw
 import time
 
@@ -16,19 +16,27 @@ import time
 #   * get system info for config
 #   - go through each software and grab configs
 #   - file backups
-#   - compress config
+#   * compress config
 
 debug = True
 
 def create_config(path):
+    try:
+        if debug: shutil.rmtree(os.path.join(os.getcwd(), "windows10-linuxconvert"))
+    except:
+        pass
     # create config dir and json
     os.mkdir(path)
     conf_file = open(os.path.join(path, "windows-config.json"), "w")
     dprint("made conf folder and file")
 
     # get wallpaper. TODO: Test
-    dprint(get_wallpaper())
-    # shutil.copyfile(get_wallpaper(), os.path.join(os.getcwd(), "background.jpg"))
+    registry = ConnectRegistry(None, HKEY_CURRENT_USER)
+    key = OpenKey(
+        registry, r"\\Control Panel\\Desktop"
+    )
+    wallpaper_path = QueryValueEx(key, "WallPaper")
+    print(wallpaper_path)
     
     # get taskbar height + position
     monitor_info = GetMonitorInfo(MonitorFromPoint((0, 0)))
@@ -73,11 +81,14 @@ def create_config(path):
     }
 
     conf_file.write(json.dumps(config))
+    conf_file.close()
     dprint("wrote config to conf_file")
+    os.mkdir(os.path.join(path, "applications"))
 
 def get_config_from_software(software):
 
     if software.check_windows():
+        software.create_config()
         software.get_config_windows()
         dprint("Got config from " + software.name)
     else:
@@ -96,7 +107,7 @@ def main():
         get_config_from_software(s)
     
     zipfile = "windows10-linuxconvert-" + time.strftime("%m-%d-%H-%M-%S")
-    shutil._make_zipfile(zipfile, os.getcwd())
+    shutil.make_archive(zipfile, "zip", conf_path, conf_path)
 
     shutil.rmtree(conf_path)
         

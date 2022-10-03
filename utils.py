@@ -4,14 +4,19 @@ from software import neofetch, flameshot, vscode, backups
 
 debug = True
 
+def get_root_folder():
+    for filename in os.listdir(os.getcwd()):
+        if "-linuxconvert" in filename:
+            return filename
+            
 def locate_application_path(name):
     """
     returns full path of application folder
     (folder should look like:
 
-    app_name/
-        app_name_application.json
-        config (optional)/
+    app_name/\n
+    --- app_name_application.json\n
+    --- config/\n
             ...
     )
     """
@@ -21,7 +26,7 @@ def locate_application_path(name):
             for application_folder in os.listdir(os.path.join(os.getcwd(), filename, "applications")):
 
                 if application_folder == name:
-                    return os.path.join(os.path.join(os.getcwd(), filename, "applications", application_folder))
+                    return os.path.join(os.getcwd(), filename, "applications", application_folder)
 
 def get_softwares():
     output = []
@@ -39,7 +44,7 @@ def dprint(message):
     """
 
     if debug:
-        print("DEBUG: " + message)
+        print("DEBUG: " + str(message))
 
 def eprint(message):
     """
@@ -47,7 +52,7 @@ def eprint(message):
     """
 
     if debug:
-        print("ERROR: " + message)
+        print("ERROR: " + str(message))
 
 def move_dirs_to_dir(dirs, output):
     try:
@@ -62,4 +67,4 @@ def move_dirs_to_dir(dirs, output):
     except FileNotFoundError as e:
         eprint(e.strerror)
         return False # it didn't work
-    return True # it worked
+    return True # it worked :)
