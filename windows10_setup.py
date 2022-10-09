@@ -2,7 +2,6 @@ import os
 import platform
 import sys
 import json
-from wallpaper import get_wallpaper
 import shutil
 from win32api import GetMonitorInfo, MonitorFromPoint
 import darkdetect
@@ -14,8 +13,7 @@ import time
 # TODO: features:
 #   * create config folder + config
 #   * get system info for config
-#   - go through each software and grab configs
-#   - file backups
+#   * go through each software and grab configs
 #   * compress config
 
 debug = True

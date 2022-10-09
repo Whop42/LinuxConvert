@@ -48,7 +48,8 @@ class Install_Software:
                 dprint(output)
                 print(name + " installed.")
             else:
-                if name not in [applications[i][1] for i in applications]
+                if name not in [applications[i][1] for i in applications]:
+                    dprint(name  +  " isn't in applications...")
             
     def install_from_list(self):
         for application in self.applications:

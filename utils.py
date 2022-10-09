@@ -1,6 +1,8 @@
 import os
 import shutil
 from software import neofetch, flameshot, vscode, backups
+from distutils.dir_util import copy_tree
+from distutils.errors import DistutilsFileError
 
 debug = True
 
@@ -54,17 +56,29 @@ def eprint(message):
     if debug:
         print("ERROR: " + str(message))
 
-def move_dirs_to_dir(dirs, output):
+def copy_dir(src, dest):
+    """
+    copies a dir to another dir
+    returns false if any errors, true otherwise
+    """
     try:
-        os.mkdir(output)
-    except FileExistsError as e:
-        eprint(output + " already exists")
-        return False # it didn't work
-    
-    try:
-        for f in dirs:
-            shutil.copytree(f, os.path.join(output, f))
+        copy_tree(src.replace("~", os.path.expanduser("~")), dest.replace("~", os.path.expanduser("~")))
+        return True
     except FileNotFoundError as e:
-        eprint(e.strerror)
-        return False # it didn't work
-    return True # it worked :)
+        eprint(e)
+    except DistutilsFileError as e:
+        eprint(e)
+    return False
+
+def copy_dirs(dirs, dest):
+    """
+    copies a list of dirs to another dir
+    returns false if any errors, true otherwise
+    """
+
+    for d in dirs:
+        if copy_dir(d, os.path.join(dest, os.path.split(d)[1])):
+            dprint(f"copied {d} to {dest}")
+        else:
+            return False
+    return True
