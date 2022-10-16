@@ -134,6 +134,6 @@ class Software:
             "name": self.name
         }))
         f.close()
-        utils.dprint("created application.json")
+        utils.dprint("created application.json for " + self.name)
 
         os.mkdir(self.get_config_folder())

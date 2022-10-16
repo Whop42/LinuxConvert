@@ -4,8 +4,14 @@ from software import neofetch, flameshot, vscode, backups
 from distutils.dir_util import copy_tree
 from distutils.file_util import copy_file as cp_file
 from distutils.errors import DistutilsFileError
+import logging
 
 debug = True
+
+logging.basicConfig(
+    format="%(asctime)-15s [%(levelname)s]: %(message)s",
+    level=logging.DEBUG
+)
 
 def get_root_folder():
     for filename in os.listdir(os.getcwd()):
@@ -46,16 +52,14 @@ def dprint(message):
     prints a debug message
     """
 
-    if debug:
-        print("DEBUG: " + str(message))
+    logging.debug(str(message))
 
 def eprint(message):
     """
     prints an error
     """
 
-    if debug:
-        print("ERROR: " + str(message))
+    logging.error(str(message))
 
 def copy_dir(src, dest):
     """
@@ -69,6 +73,8 @@ def copy_dir(src, dest):
         eprint(e)
     except DistutilsFileError as e:
         eprint(e)
+    except OSError as e:
+        eprint(e)    
     return False
 
 def copy_dirs(dirs, dest):
