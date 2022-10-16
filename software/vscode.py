@@ -40,7 +40,7 @@ class vscode(Software.Software):
         """
 
 
-        programs_path  = os.path.expandvars("%LOCALAPPDATA%\\Programs\\Microsoft VS Code")
+        programs_path = os.path.expandvars("%APPDATA%\\Code")
         program_files_x86_path = "C:\\Program Files (x86)\\Microsoft VS Code"
         program_files_x64_path = "C:\\Program Files\\Microsoft VS Code"
         path = 1 # 1 for programs, 2 for x86, 3 for x64

@@ -29,12 +29,12 @@ def create_config(path):
     dprint("made conf folder and file")
 
     # get wallpaper. TODO: Test
-    registry = ConnectRegistry(None, HKEY_CURRENT_USER)
-    key = OpenKey(
-        registry, r"\\Control Panel\\Desktop"
-    )
-    wallpaper_path = QueryValueEx(key, "WallPaper")
-    print(wallpaper_path)
+    # registry = ConnectRegistry(None, HKEY_CURRENT_USER)
+    # key = OpenKey(
+    #     registry, r"\\Control Panel\\Desktop"
+    # )
+    # wallpaper_path = QueryValueEx(key, "WallPaper")
+    # print(wallpaper_path)
     
     # get taskbar height + position
     monitor_info = GetMonitorInfo(MonitorFromPoint((0, 0)))
@@ -104,6 +104,7 @@ def main():
     for s in get_softwares():
         get_config_from_software(s)
     
+    dprint("zipping...")
     zipfile = "windows10-linuxconvert-" + time.strftime("%m-%d-%H-%M-%S")
     shutil.make_archive(zipfile, "zip", conf_path, conf_path)
 
