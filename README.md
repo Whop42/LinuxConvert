@@ -48,6 +48,7 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
         - [X] Make each of them a software
     - [ ] GUI
 - [ ] Theme XFCE to appear similar to original OS, along with personalization settings
+- [ ] Recommendation system for proprietary/bad software
 - [ ] Create scripts to install popular applications w/configs
     - [ ] Firefox
     - [ ] Chromium
@@ -63,4 +64,3 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
 - [ ] Create GUI for install
 - [ ] Make website with instructions for install
 - [ ] Create scripts to install more applications
-    - [ ]  
