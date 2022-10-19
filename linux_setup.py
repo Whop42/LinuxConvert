@@ -11,6 +11,7 @@ zipfile = sys.argv[1]
 
 if zipfile:
     try:
+        #TODO: move zipfile to cloned directory! (it's not working rn)
         shutil._unpack_zipfile(zipfile, os.getcwd())
     except OSError as e:
         eprint(str(e))
