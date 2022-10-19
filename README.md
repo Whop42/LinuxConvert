@@ -43,9 +43,10 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
 - [ ] Windows application
     - [X] Create config folder + config file
     - [X] Get system personalization options
-    - [ ] Update each Software to get windows configs
-    - [ ] Backup Documents, Pictures, etc.
-        - [ ] Make each of them a software
+    - [X] Update each Software to get windows configs
+    - [X] Backup Documents, Pictures, etc.
+        - [X] Make each of them a software
+    - [ ] GUI
 - [ ] Theme XFCE to appear similar to original OS, along with personalization settings
 - [ ] Create scripts to install popular applications w/configs
     - [ ] Firefox
