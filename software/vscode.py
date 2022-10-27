@@ -56,13 +56,11 @@ class vscode(Software.Software):
         dirs = ["CachedExtensions", "CachedExtensionVSIXs", "User"]
         files = ["languagepacks.json", "Network Persistent State", "Preferences", "TransportSecurity"]
 
-        full_dirs = [os.path.join(programs_path, d) for d in dirs]
-
-        if utils.copy_dirs(full_dirs, self.get_config_folder()):
+        if utils.copy_dir(programs_path, self.get_config_folder()):
             path = 1
-        elif utils.copy_dirs([os.path.join(program_files_x86_path, d) for d in dirs], self.get_config_folder()):
+        elif utils.copy_dirs(program_files_x86_path, self.get_config_folder()):
             path = 2
-        elif utils.copy_dirs([os.path.join(program_files_x64_path, d) for d in dirs], self.get_config_folder()):
+        elif utils.copy_dirs(program_files_x64_path, self.get_config_folder()):
             path = 3
         else:
             return False
@@ -75,3 +73,21 @@ class vscode(Software.Software):
             return True
         else:
             return False
+
+        # if utils.copy_dirs(full_dirs, self.get_config_folder()):
+        #     path = 1
+        # elif utils.copy_dirs([os.path.join(program_files_x86_path, d) for d in dirs], self.get_config_folder()):
+        #     path = 2
+        # elif utils.copy_dirs([os.path.join(program_files_x64_path, d) for d in dirs], self.get_config_folder()):
+        #     path = 3
+        # else:
+        #     return False
+
+        # if utils.copy_files([os.path.join(programs_path, f) for f in files], self.get_config_folder()):
+        #     return True
+        # elif utils.copy_files([os.path.join(program_files_x86_path, f) for f in files], self.get_config_folder()):
+        #     return True
+        # elif utils.copy_files([os.path.join(program_files_x64_path, f) for f in files], self.get_config_folder()):
+        #     return True
+        # else:
+        #     return False
