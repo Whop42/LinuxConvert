@@ -30,10 +30,10 @@ def locate_application_path(name):
     )
     """
 
-    for application_folder in os.listdir(os.path.join(get_root_folder, "applications")):
+    for application_folder in os.listdir(os.path.join(get_root_folder(), "applications")):
 
         if application_folder == name:
-            return os.path.join(get_root_folder, "applications", application_folder)
+            return os.path.join(get_root_folder(), "applications", application_folder)
 
 def get_softwares():
     output = []
