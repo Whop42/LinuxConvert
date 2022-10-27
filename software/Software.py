@@ -19,20 +19,22 @@ class Software:
         self.generic_name = self.name
         self.icon = ""
 
-    def cmd(self, command, sudo=True):
+        self.package_manager = "yay"
+
+    def cmd(self, command, sudo=False):
         if sudo:
             command.insert(0, "sudo")
         output = subprocess.run(command, stdout=subprocess.PIPE)
         return str(output.stdout)
     
     def install_package(self, pkg):
-        return self.cmd(["pacman", "-Sy", "--noconfirm", "--asdeps", str(pkg)])
+        return self.cmd([self.package_manager, "-Sy", "--noconfirm", str(pkg)], sudo=False)
     
     def remove_package(self, pkg):
-        return self.cmd(["pacman", "-R", "--noconfirm", str(pkg)])
+        return self.cmd([self.package_manager, "-R", "--noconfirm", str(pkg)], sudo=False)
     
     def query_package(self, pkg):
-        output = self.cmd(["pacman", "-Q", str(pkg)])
+        output = self.cmd([self.package_manager, "-Q", str(pkg)], sudo=False)
         if pkg in output and "error" not in output:
             return True
         return False
