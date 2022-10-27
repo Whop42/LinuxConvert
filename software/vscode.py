@@ -16,6 +16,7 @@ class vscode(Software.Software):
         self.pkg_names = ["vscodium-git", "vscodium-git-marketplace", "icu-git"]
     
     def install(self):
+        output = ""
         # install "Code - OSS" w/ package manager
         for pkg in self.pkg_names:
             output += self.install_package(pkg)
