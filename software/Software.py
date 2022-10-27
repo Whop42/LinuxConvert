@@ -88,7 +88,7 @@ class Software:
         returns full path of application folder
         """
 
-        return os.path.join(utils.locate_application_path())
+        return os.path.join(utils.locate_application_path(self.name))
 
     def get_config_folder(self):
         """
