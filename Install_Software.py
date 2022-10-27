@@ -10,23 +10,22 @@ class Install_Software:
         self.config = {}
         self.softwares = get_softwares()
 
-    def load_files(self, directory) -> dict:
-        path = os.getcwd()
-        root_dir = get_root_folder()
-        for filename in os.listdir(root_dir):
-            for application_folder in os.listdir(os.path.join(root_dir, "applications")):
-                for application_file in os.listdir(os.path.join(root_dir, "applications", application_folder)):
+    def load_files(self, dir) -> dict:
+        dprint("loading files from " + str(dir))
+        for filename in os.listdir(dir):
+            for application_folder in os.listdir(os.path.join(dir, "applications")):
+                for application_file in os.listdir(os.path.join(dir, "applications", application_folder)):
                     try:
-                        f = open(os.path.join(root_dir, "applications", application_folder, application_file))
+                        f = open(os.path.join(dir, "applications", application_folder, application_file))
                         json_str = json.loads(f.read())
                         self.applications.append([application_folder, json_str["name"]])
                         f.close()
                     except:
                         eprint(application_file + " is not a valid application configuration")
             dprint(str(self.applications))
-            for f in os.listdir(root_dir):
+            for f in os.listdir(dir):
                 if "-config.json" in f:
-                    config_file = open(os.path.join(root_dir, f))
+                    config_file = open(os.path.join(dir, f))
                     self.config = json.loads(config_file.read())
                     config_file.close()
                     dprint("created config file")
@@ -47,7 +46,7 @@ class Install_Software:
                 dprint(output)
                 print(name + " installed.")
             else:
-                if name not in [applications[i][1] for i in applications]:
+                if name not in [self.applications[i][1] for i in self.applications]:
                     dprint(name  +  " isn't in applications...")
             
     def install_from_list(self):

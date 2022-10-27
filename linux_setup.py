@@ -11,12 +11,12 @@ zipfile = sys.argv[1]
 
 if zipfile:
     try:
-        shutil._unpack_zipfile(zipfile, os.path.join(os.getcwd(), zipfile.removesuffix(".zip")))
+        shutil.unpack_archive(zipfile, os.path.join(os.getcwd(), zipfile.removesuffix(".zip")))
     except OSError as e:
         eprint(str(e))
         exit()
     dprint("unzipped config folder")
-    config = install_software.load_files(zipfile.removesuffix(".zip"))
+    config = install_software.load_files(zipfile.replace(".zip", ""))
     dprint("loaded config")
     install_software.install_from_list()
     print("LinuxConvert install completed!")
