@@ -15,7 +15,7 @@ logging.basicConfig(
 
 def get_root_folder():
     for filename in os.listdir(os.getcwd()):
-        if "-linuxconvert" in filename:
+        if "-linuxconvert" in filename and ".zip" not in filename:
             return filename
             
 def locate_application_path(name):
@@ -30,12 +30,10 @@ def locate_application_path(name):
     )
     """
 
-    for filename in os.listdir(os.getcwd()):
-        if "-linuxconvert" in filename:
-            for application_folder in os.listdir(os.path.join(os.getcwd(), filename, "applications")):
+    for application_folder in os.listdir(os.path.join(get_root_folder, "applications")):
 
-                if application_folder == name:
-                    return os.path.join(os.getcwd(), filename, "applications", application_folder)
+        if application_folder == name:
+            return os.path.join(get_root_folder, "applications", application_folder)
 
 def get_softwares():
     output = []
