@@ -16,7 +16,7 @@ class backups(Software.Software):
         return
     
     def check_install(self):
-        if "Documents" in os.listdir("~/"):
+        if "Documents" in os.listdir(os.path.expanduser("~")):
             return True
         return False
 
