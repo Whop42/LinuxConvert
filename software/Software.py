@@ -28,16 +28,16 @@ class Software:
         return str(output.stdout)
     
     def install_package(self, pkg):
-        output = self.cmd(["yay", "-Sy", "--noconfirm", str(pkg)], sudo=False)
+        output = self.cmd(["yay", "-Sy", "--noconfirm", str(pkg)], sudo=True)
         # if "error:" in output:
         #     return False
         return output
     
     def remove_package(self, pkg):
-        return self.cmd(["yay", "-R", "--noconfirm", str(pkg)], sudo=False)
+        return self.cmd(["yay", "-R", "--noconfirm", str(pkg)], sudo=True)
     
     def query_package(self, pkg):
-        output = self.cmd(["yay", "-Q", str(pkg)], sudo=False)
+        output = self.cmd(["yay", "-Q", str(pkg)], sudo=True)
         if pkg in output and "error" not in output:
             return True
         return False

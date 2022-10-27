@@ -13,7 +13,7 @@ class vscode(Software.Software):
         self.generic_name = "screenshot"
         self.icon = "screengrab"
 
-        self.pkg_names = ["vscodium-git", "vscodium-git-marketplace", "icu-git"]
+        self.pkg_names = ["vscodium-bin", "vscodium-bin-marketplace"]
     
     def install(self):
         output = ""
