@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-from utils import dprint, eprint, get_softwares
+from utils import dprint, eprint, get_softwares, get_root_folder
 import shutil
 
 class Install_Software:
@@ -10,28 +10,27 @@ class Install_Software:
         self.config = {}
         self.softwares = get_softwares()
 
-    def load_files(self, directory):
+    def load_files(self, directory) -> dict:
         path = os.getcwd()
-        for filename in os.listdir(os.getcwd()):
-            if filename == directory:
-                #get applications + info
-                for application_folder in os.listdir(os.path.join(path, filename, "applications")):
-                    for application_file in os.listdir(os.path.join(path, filename, "applications", application_folder)):
-                        try:
-                            f = open(os.path.join(path, filename, "applications", application_folder, application_file))
-                            json_str = json.loads(f.read())
-                            self.applications.append([application_folder, json_str["name"], json_str["original_path"]])
-                            f.close()
-                        except:
-                            eprint(application_file + " is not a valid application configuration")
-                dprint(str(self.applications))
-                for f in os.listdir(os.path.join(path, filename)):
-                    if "-config.json" in f:
-                        config_file = open(os.path.join(path, filename, f))
-                        self.config = json.loads(config_file.read())
-                        config_file.close()
-                        dprint("created config file")
-                return self.config
+        root_dir = get_root_folder()
+        for filename in os.listdir(root_dir):
+            for application_folder in os.listdir(os.path.join(root_dir, "applications")):
+                for application_file in os.listdir(os.path.join(root_dir, "applications", application_folder)):
+                    try:
+                        f = open(os.path.join(root_dir, "applications", application_folder, application_file))
+                        json_str = json.loads(f.read())
+                        self.applications.append([application_folder, json_str["name"]])
+                        f.close()
+                    except:
+                        eprint(application_file + " is not a valid application configuration")
+            dprint(str(self.applications))
+            for f in os.listdir(root_dir):
+                if "-config.json" in f:
+                    config_file = open(os.path.join(root_dir, f))
+                    self.config = json.loads(config_file.read())
+                    config_file.close()
+                    dprint("created config file")
+            return self.config
 
         eprint("filename not in directory")
         exit()
