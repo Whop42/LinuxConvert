@@ -12,10 +12,13 @@ class vscode(Software.Software):
         self.run_cmd = "code"
         self.generic_name = "screenshot"
         self.icon = "screengrab"
+
+        self.pkg_names = ["vscodium-git", "vscodium-git-marketplace", "icu-git"]
     
     def install(self):
         # install "Code - OSS" w/ package manager
-        output = [self.install_package("vscodium-git"), self.install_package("vscodium-git-marketplace")]
+        for pkg in self.pkg_names:
+            output += self.install_package(pkg)
         # move configs
         self.move_configs("~/.config/Code - OSS")
         
@@ -23,10 +26,14 @@ class vscode(Software.Software):
 
     
     def uninstall(self):
-        return self.remove_package("code")
+        output = ""
+        for pkg in self.pkg_names:
+            output += str(self.remove_package(pkg))
+        return output
+
     
     def check_install(self):
-        return self.query_package("code")
+        return self.query_package(self.pkg_names[0])
     
     def check_windows(self):
         if shutil.which("code"):

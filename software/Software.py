@@ -88,13 +88,13 @@ class Software:
         returns full path of application folder
         """
 
-        return os.path.join(os.getcwd(), utils.get_root_folder(), "applications", self.name)
+        return os.path.join(utils.locate_application_path())
 
     def get_config_folder(self):
         """
         returns full path of application's config folder
         """
-        return os.path.join(os.getcwd(), utils.get_root_folder(), "applications", self.name, "config")
+        return os.path.join(self.get_folder, "config")
     
     def move_configs(self, dest):
         """
@@ -106,9 +106,7 @@ class Software:
         """
         output = []
         config_folder = os.path.join(self.get_folder(), "config")
-        for f in os.listdir(config_folder):
-            shutil.copy(os.path.join(config_folder, f), os.path.join(dest, f))
-            output.append("Moving %s to %s" % (f, os.path.join(dest, f)))
+        utils.copy_dir(config_folder, dest)
         output.append("Moved config files from %s to %s" % (self.name, dest))
         return output
     
@@ -123,6 +121,8 @@ class Software:
     def get_config_windows(self):
         """
         copies windows config to utils.locate_application_path()
+
+        Note: returns False by default
         """
 
         return False

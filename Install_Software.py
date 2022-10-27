@@ -47,10 +47,11 @@ class Install_Software:
                 if software.check_install():
                     dprint(software.name + " is already installed. Skipping...")
                     return
+                
                 print("Installing " + software.name + "...")
                 output = software.install()
-                software.create_desktop(os.getcwd() + str(software.name) + ".desktop")
-                dprint(output)
+                software.create_desktop(os.path.expanduser(os.path.join("~/Desktop", str(software.name) + ".desktop")))
+                dprint(output.replace("\\n", "\n"))
                 print(name + " installed.")
             else:
                 application_name_list = []
