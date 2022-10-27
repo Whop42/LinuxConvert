@@ -15,7 +15,7 @@ class vscode(Software.Software):
     
     def install(self):
         # install "Code - OSS" w/ package manager
-        output = [self.install_package("code"), self.install_package("code-marketplace")]
+        output = [self.install_package("vscodium-git"), self.install_package("vscodium-git-marketplace")]
         # move configs
         self.move_configs("~/.config/Code - OSS")
         
