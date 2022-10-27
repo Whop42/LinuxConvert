@@ -37,7 +37,7 @@ class Software:
         return self.cmd(["yay", "-R", "--noconfirm", str(pkg)], sudo=False)
     
     def query_package(self, pkg):
-        output = self.cmd("yay", "-Q", str(pkg)], sudo=False)
+        output = self.cmd(["yay", "-Q", str(pkg)], sudo=False)
         if pkg in output and "error" not in output:
             return True
         return False
