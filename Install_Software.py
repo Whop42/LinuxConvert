@@ -13,26 +13,33 @@ class Install_Software:
     def load_files(self, dir) -> dict:
         dprint("loading files from " + str(dir))
         for filename in os.listdir(dir):
-            for application_folder in os.listdir(os.path.join(dir, "applications")):
-                for application_file in os.listdir(os.path.join(dir, "applications", application_folder)):
+            for application_folder in os.listdir(os.path.join(dir, "applications")): # for each application folder
+                for application_file in os.listdir(os.path.join(dir, "applications", application_folder)): # for each file in the application folder
+                    if ".json" not in application_file:
+                        continue # ignore if not .json file
+
                     try:
                         f = open(os.path.join(dir, "applications", application_folder, application_file))
                         json_str = json.loads(f.read())
+
+                        # applications list format: folder name, real name
                         self.applications.append([application_folder, json_str["name"]])
+
                         f.close()
                     except:
                         eprint(application_file + " is not a valid application configuration")
-            dprint(str(self.applications))
+            dprint("applications list: " + str(self.applications))
+
             for f in os.listdir(dir):
-                if "-config.json" in f:
+                # find the config file and dump it into self.config
+                if "-config.json" in f: 
                     config_file = open(os.path.join(dir, f))
                     self.config = json.loads(config_file.read())
                     config_file.close()
-                    dprint("created config file")
-            return self.config
-
-        eprint("filename not in directory")
-        exit()
+                    dprint("dumped -config.json file")
+                    return
+            eprint("couldn't find -config.json file")
+            exit()
 
     def install(self, name):
         for software in self.softwares:
@@ -46,7 +53,10 @@ class Install_Software:
                 dprint(output)
                 print(name + " installed.")
             else:
-                if name not in [self.applications[i][1] for i in self.applications]:
+                application_name_list = []
+                for application in self.applications:
+                    application_name_list.append(application[1])
+                if name not in application_name_list:
                     dprint(name  +  " isn't in applications...")
             
     def install_from_list(self):
