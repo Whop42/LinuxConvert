@@ -11,6 +11,7 @@ class backups(Software.Software):
     
     def install(self):
         self.move_configs("~/")
+        return "moved configs..."
     
     def uninstall(self):
         return
