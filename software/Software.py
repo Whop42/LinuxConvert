@@ -99,7 +99,7 @@ class Software:
         """
         returns full path of application's config folder
         """
-        return os.path.join(self.get_folder, "config")
+        return os.path.join(self.get_folder(), "config")
     
     def move_configs(self, dest):
         """
