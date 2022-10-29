@@ -17,8 +17,8 @@ if zipfile:
         eprint(str(e))
         exit()
     dprint("unzipped config folder to " + conf_path)
-    print(os.path.split(str(conf_path[1])))
-    final_conf_path = os.path.join(os.getcwd(), os.path.split(str(conf_path[1])))
+    # print(os.path.split(str(conf_path[1])))
+    final_conf_path = os.path.join(os.getcwd(), os.path.split(conf_path)[1])
 
     exit()
 
