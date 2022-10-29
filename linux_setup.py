@@ -10,13 +10,25 @@ install_software = Install_Software()
 zipfile = sys.argv[1]
 
 if zipfile:
+    conf_path = zipfile.removesuffix(".zip")
     try:
-        shutil.unpack_archive(zipfile, os.path.join(os.getcwd(), zipfile.removesuffix(".zip")))
+        shutil.unpack_archive(zipfile, os.path.join(os.getcwd(), conf_path))
     except OSError as e:
         eprint(str(e))
         exit()
-    dprint("unzipped config folder")
-    config = install_software.load_files(zipfile.replace(".zip", ""))
+    dprint("unzipped config folder to " + conf_path)
+
+    final_conf_path = os.path.join(os.getcwd(), os.path.split(conf_path[1]))
+
+    try:
+        shutil.move(conf_path, os.path.join(os.getcwd(), final_conf_path))
+    except OSError as e:
+        eprint(str(e))
+        exit()
+    dprint("moved config folder to " + final_conf_path)
+
+
+    config = install_software.load_files(final_conf_path)
     dprint("loaded config")
     install_software.install_from_list()
     print("LinuxConvert install completed!")
