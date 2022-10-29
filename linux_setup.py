@@ -11,16 +11,15 @@ zipfile = sys.argv[1]
 
 if zipfile:
     conf_path = zipfile.removesuffix(".zip")
+    final_conf_path = os.path.join(os.getcwd(), os.path.split(conf_path)[1])
     try:
-        shutil.unpack_archive(zipfile, os.path.join(os.getcwd(), conf_path))
+        shutil.unpack_archive(zipfile, final_conf_path)
     except OSError as e:
         eprint(str(e))
         exit()
     dprint("unzipped config folder to " + conf_path)
     # print(os.path.split(str(conf_path[1])))
-    final_conf_path = os.path.join(os.getcwd(), os.path.split(conf_path)[1])
-
-    exit()
+    
 
     try:
         shutil.move(conf_path, os.path.join(os.getcwd(), final_conf_path))
