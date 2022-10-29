@@ -19,6 +19,8 @@ if zipfile:
     dprint("unzipped config folder to " + conf_path)
 
     final_conf_path = os.path.join(os.getcwd(), os.path.split(str(conf_path[1])))
+    print(final_conf_path)
+    exit()
 
     try:
         shutil.move(conf_path, os.path.join(os.getcwd(), final_conf_path))
