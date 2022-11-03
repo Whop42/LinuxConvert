@@ -10,8 +10,8 @@ class vscode(Software.Software):
         self.name = "vscode"
 
         self.run_cmd = "code"
-        self.generic_name = "screenshot"
-        self.icon = "screengrab"
+        self.generic_name = "vscode"
+        self.icon = "code"
 
         self.pkg_names = ["code", "code-marketplace"]
     
@@ -21,7 +21,7 @@ class vscode(Software.Software):
         for pkg in self.pkg_names:
             output += self.install_package(pkg)
         # move configs
-        self.move_configs("~/.config/Code - OSS")
+        self.move_configs("~/.config/Code - OSS/User")
         
         return output
 
@@ -45,6 +45,6 @@ class vscode(Software.Software):
         """
         copies windows config,
         """
-        utils.copy_dir(os.path.expandvars("%APPDATA%\\Code"), self.get_config_folder())
-        for dir in ["Cache", "Network", "GPUCache"]:
-            shutil.rmtree(os.path.join(self.get_config_folder(), dir))
+        utils.copy_dir(os.path.expandvars("%APPDATA%\\Code\\User"), self.get_config_folder())
+        # for dir in ["Cache", "Network", "GPUCache"]:
+        #     shutil.rmtree(os.path.join(self.get_config_folder(), dir))
