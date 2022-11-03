@@ -20,14 +20,6 @@ if zipfile:
         exit()
     dprint("unzipped config folder to " + conf_path)
 
-    try:
-        shutil.move(conf_path, final_conf_path)
-    except OSError as e:
-        eprint(str(e))
-        exit()
-    dprint("moved config folder to " + final_conf_path)
-
-
     config = install_software.load_files(final_conf_path)
     dprint("loaded config")
     install_software.install_from_list()
