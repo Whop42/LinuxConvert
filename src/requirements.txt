@@ -1,0 +1,3 @@
+py-wallpaper
+darkdetect
+pywin32
