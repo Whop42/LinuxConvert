@@ -1,7 +1,7 @@
 # LinuxConvert
 
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-green.svg)](https://opensource.org/licenses/)
-[![Github All Releases](https://img.shields.io/github/downloads/whop42/LinuxConvert/total.svg?style=flat)]()
+<!-- [![Github All Releases](https://img.shields.io/github/downloads/whop42/LinuxConvert/total.svg?style=flat)]() -->
 [![GitHub commit activity the past week, 4 weeks](https://img.shields.io/github/commit-activity/w/whop42/LinuxConvert.svg?style=flat)]()
 
 > (CSRSEF Project)
@@ -47,13 +47,13 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
     - [X] Backup Documents, Pictures, etc.
         - [X] Make each of them a software
     - [ ] GUI
-- [ ] Theme XFCE to appear similar to original OS, along with personalization settings
-- [ ] Recommendation system for proprietary/bad software
+- [_] Theme XFCE to appear similar to original OS, along with personalization settings
+- [_] Recommendation system for proprietary/bad software
 - [ ] Create scripts to install popular applications w/configs
     - [ ] Firefox
     - [ ] Chromium
     - [ ] Edge
-    - [ ] VSCode
+    - [X] VSCode
     - [ ] Office (LibreOffice or similar)
         - [ ] Theme LibreOffice like MS Office
     - [ ] Zoom
