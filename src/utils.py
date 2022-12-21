@@ -1,26 +1,36 @@
 import os
 import shutil
+from typing import NoReturn
 from software import neofetch, flameshot, vscode, backups
 from distutils.dir_util import copy_tree
 from distutils.file_util import copy_file as cp_file
 from distutils.errors import DistutilsFileError
 import logging
 
-debug = True
+debug: bool = True
 
 logging.basicConfig(
     format="%(asctime)-15s [%(levelname)s]: %(message)s",
     level=logging.DEBUG
 )
 
-def get_root_folder():
+def get_root_folder() -> str:
+    """
+    finds the root folder (produced by unzipping zip)
+    exit()s if it can't find it
+    """
+    filename: str = ""
     for filename in os.listdir(os.getcwd()):
         if "-linuxconvert" in filename and ".zip" not in filename:
             return filename
+    eprint("couldn't find root folder")
+    exit(0)
             
-def locate_application_path(name):
+def locate_application_path(name) -> str:
     """
     returns full path of application folder
+    exit()s if it can't find the path
+
     (folder should look like:
 
     app_name/\n
@@ -30,12 +40,16 @@ def locate_application_path(name):
     )
     """
 
-    for application_folder in os.listdir(os.path.join(get_root_folder(), "applications")):
+    root_folder: str = get_root_folder()
+
+    for application_folder in os.listdir(os.path.join(root_folder, "applications")):
 
         if application_folder == name:
-            return os.path.join(get_root_folder(), "applications", application_folder)
+            return os.path.join(root_folder, "applications", application_folder)
+    eprint("couldn't locate application path")
+    exit(0)
 
-def get_softwares():
+def get_softwares() -> list[str]:
     output = []
 
     output.append(neofetch.neofetch())
@@ -59,49 +73,44 @@ def eprint(message):
 
     logging.error(str(message))
 
-def copy_dir(src, dest):
+def copy_dir(src: str, dest: str):
     """
     copies a dir to another dir
-    returns false if any errors, true otherwise
+    exit()s if any errors
     """
     try:
         copy_tree(src.replace("~", os.path.expanduser("~")), dest.replace("~", os.path.expanduser("~")))
-        return True
-    except FileNotFoundError as e:
-        eprint(e)
-    except DistutilsFileError as e:
-        eprint(e)
     except OSError as e:
-        eprint(e)    
-    return False
+        eprint(e)
+        exit(0)
 
-def copy_dirs(dirs, dest):
+def copy_dirs(dirs: list[str], dest: str):
     """
     copies a list of dirs to another dir
-    returns false if any errors, true otherwise
+    uses copy_dir(), which exit()s if any errors occur
     """
 
     for d in dirs:
-        if copy_dir(d, os.path.join(dest, os.path.split(d)[1])):
-            dprint(f"copied {d} to {dest}")
-        else:
-            return False
-    return True
+        copy_dir(d, os.path.join(dest, os.path.split(d)[1]))
+        dprint(f"copied {d} to {dest}")
 
-def copy_file(src, dest):
+def copy_file(src: str, dest: str):
+    """
+    copies a file to a file
+    exit()s if any errors
+    """
     try:
         cp_file(src.replace("~", os.path.expanduser("~")), dest.replace("~", os.path.expanduser("~")))
         return True
-    except FileNotFoundError as e:
+    except OSError as e:
         eprint(e)
-    except DistutilsFileError as e:
-        eprint(e)
-    return False
+        exit(0)
 
 def copy_files(files, dest):
+    """
+    copies files to a dir
+    uses copy_file(), which exit()s if any errors
+    """
     for f in files:
-        if copy_file(f, os.path.join(dest, os.path.split(f)[1])):
-            dprint(f"copied {f} to {dest}")
-        else:
-            return False
-    return True
+        copy_file(f, os.path.join(dest, os.path.split(f)[1]))
+        dprint(f"copied {f} to {dest}")

@@ -1,5 +1,6 @@
 import subprocess
 import utils
+from utils import dprint, eprint
 import shutil
 import json
 import os
@@ -21,26 +22,136 @@ class Software:
 
         self.package_manager = "yay"
 
-    def cmd(self, command, sudo=False):
+    def cmd(self, command: list[str], sudo: bool = False) -> str:
+        """
+        cmd runs a command
+
+        params:
+            list[str] command -> the command to run (main command followed by args)
+            bool sudo -> whether or not to run as sudo (default False)
+
+        returns:
+            str -> output of the command
+        
+        raises:
+            Exception -> command fails
+        """
         if sudo:
             command.insert(0, "sudo")
+        
         output = subprocess.run(command, stdout=subprocess.PIPE)
+
+        # catch errors!
+        if output.returncode != 0:
+            raise Exception("command " + str(command) + " failed...")
+
         return str(output.stdout)
     
-    def install_package(self, pkg):
-        output = self.cmd(["yay", "-Sy", "--noconfirm", str(pkg)])
-        # if "error:" in output:
-        #     return False
+    def install_packages(self, pkgs: list[str]) -> str:
+        """
+        install_packages installs a list of packages with yay
+
+        params:
+            list[str] pkgs -> the list of packages
+        
+        returns:
+            str -> output of installation
+        
+        exits:
+            Exception in self.cmd()
+        """
+        cmd: list[str] = ["yay", "-Syyu", "--noconfirm"]
+
+        for pkg in pkgs:
+            cmd.append(pkg)
+
+        try:
+            output: str = self.cmd(cmd)
+        except Exception as e:
+            eprint(str(e))
+            exit()
+
         return output
     
-    def remove_package(self, pkg):
-        return self.cmd(["yay", "-R", "--noconfirm", str(pkg)])
+    def install_package(self, pkg: str) -> str:
+        """
+        install_package installs a package with yay
+        (an alias for install_packages([pkg]))
+
+        params:
+            str pkg -> the package
+        
+        returns:
+            str -> output of installation
+        
+        exits:
+            Exception in self.cmd()
+        """
+        
+        output: str = self.install_packages([pkg])
+
+        return output
+
+    def remove_packages(self, pkgs: list[str]) -> str:
+        """
+        remove_packages removes a list of packages with yay
+
+        params:
+            list[str] pkgs -> the list of packages
+        
+        returns:
+            str -> output of installation
+        
+        exits:
+            Exception in self.cmd()
+        """
+        cmd: list[str] = ["yay", "-R", "--noconfirm"]
+
+        for pkg in pkgs:
+            cmd.append(pkg)
+
+        try:
+            output: str = self.cmd(cmd)
+        except Exception as e:
+            eprint(str(e))
+            exit()
+
+        return output
     
     def query_package(self, pkg):
         output = self.cmd(["yay", "-Q", str(pkg)])
         if pkg in output and "error" not in output:
             return True
         return False
+
+    def query_packages(self, pkgs: list[str]) -> str:
+        """
+        install_packages installs a list of packages with yay
+
+        params:
+            list[str] pkgs -> the list of packages
+        
+        returns:
+            str -> output of installation
+        
+        exits:
+            Exception in self.cmd()
+        """
+        cmd: list[str] = ["yay", "Q"]
+
+        for pkg in pkgs:
+            cmd.append(pkg)
+
+        try:
+            output: str = self.cmd(cmd)
+
+            for pkg in pkgs:
+                assert pkg in output
+        except Exception as e:
+            eprint(str(e))
+            exit()
+
+        return output
 
     def install(self):
         """
@@ -142,3 +253,9 @@ class Software:
         utils.dprint("created application.json for " + self.name)
 
         os.mkdir(self.get_config_folder())
+    
+    def recommend(self, alternative, reason) -> bool:
+        resp: str = input(self.name + " " + reason + " It is recommended to " + alternative + " Would you like to? (Y/n): ").lower()
+        if resp == "n":
+            return False
+        return True
