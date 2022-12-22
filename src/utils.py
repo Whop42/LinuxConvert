@@ -1,7 +1,6 @@
 import os
 import shutil
 from typing import NoReturn
-from software import neofetch, flameshot, vscode, backups
 from distutils.dir_util import copy_tree
 from distutils.file_util import copy_file as cp_file
 from distutils.errors import DistutilsFileError
@@ -48,16 +47,6 @@ def locate_application_path(name) -> str:
             return os.path.join(root_folder, "applications", application_folder)
     eprint("couldn't locate application path")
     exit(0)
-
-def get_softwares() -> list[str]:
-    output = []
-
-    output.append(neofetch.neofetch())
-    output.append(flameshot.flameshot())
-    output.append(vscode.vscode())
-    output.append(backups.backups())
-
-    return output
 
 def dprint(message):
     """

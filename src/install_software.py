@@ -1,7 +1,9 @@
 import os
 import sys
 import json
-from utils import dprint, eprint, get_softwares, get_root_folder
+from utils import dprint, eprint, get_root_folder
+from software import Software
+from software.get_softwares import get_softwares
 import shutil
 
 class Install_Software:

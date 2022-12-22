@@ -7,11 +7,12 @@ from typing import Tuple
 from win32api import GetMonitorInfo, MonitorFromPoint
 import darkdetect
 from winreg import ConnectRegistry, OpenKey, QueryValueEx, HKEY_CURRENT_USER
-from utils import dprint, get_softwares, debug
+from utils import dprint, debug
 import software.Software
 import time
 import logging
 import utils
+from software.get_softwares import get_softwares
 
 logger: logging.Logger = logging.getLogger(__name__ + "::" + __file__)
 
@@ -19,6 +20,21 @@ def main():
     if not "Windows" in platform.system():
         print("Not running on windows. Stopping...")
         return
+
+    original_wd: str = os.getcwd()
+
+    # i'm so, so, so sorry
+    if "C:" not in original_wd:
+        path: str = "C:\\LinuxConvert\\"
+        try:
+            os.remove(path)
+            dprint("% s removed successfully..." % path)
+            assert os.path.exists(path)
+        except OSError as error:
+            dprint(path + " doesn't exist...")
+        os.mkdir(path)
+        utils.copy_dir(os.getcwd(), path)
+        os.chdir(path)
 
     conf_path = os.path.join(os.getcwd(), "windows10-linuxconvert")
 
