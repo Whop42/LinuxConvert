@@ -25,12 +25,12 @@ def main():
 
     # i'm so, so, so sorry
     if "C:" not in original_wd:
-        path: str = "C:\\LinuxConvert\\"
+        path: str = "C:\\LinuxConvert"
         try:
-            os.remove(path)
-            dprint("% s removed successfully..." % path)
             assert os.path.exists(path)
-        except OSError as error:
+            shutil.rmtree(path)
+            dprint("% s removed successfully..." % path)
+        except:
             dprint(path + " doesn't exist...")
         os.mkdir(path)
         utils.copy_dir(os.getcwd(), path)
@@ -44,13 +44,13 @@ def main():
         get_config_from_software(s)
     
     dprint("zipping...")
-    zipfile = "windows10-linuxconvert-" + time.strftime("%m-%d-%H-%M-%S")
+    zipfile = os.path.join(original_wd, "windows10-linuxconvert-" + time.strftime("%m-%d-%H-%M-%S"))
     shutil.make_archive(zipfile, "zip", conf_path, conf_path)
 
     shutil.rmtree(conf_path)
         
     dprint(conf_path + " removed.")
-    print(f"File created: {os.getcwd() + zipfile}")
+    print(f"File created: {zipfile}")
     print("Complete!")
 
 def create_config(path: str):

@@ -26,7 +26,7 @@ class backups(Software.Software):
 
     def get_config_windows(self):
 
-        dirs = ["~/Pictures", "~/Downloads", "~/Videos", "~/Documents"]
+        dirs = ["~/OneDrive/Pictures", "~/Downloads", "~/OneDrive/Documents", "~/Videos"]
 
         utils.dprint("copying backups...")
         if utils.copy_dirs(dirs, self.get_config_folder()):
