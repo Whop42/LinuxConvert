@@ -12,7 +12,8 @@ class flameshot(Software.Software):
         self.icon = "screengrab"
     
     def install(self):
-        return self.install_package("flameshot")
+        output = self.install_package("flameshot")
+        self.cmd(["flameshot", "-a true"]) # autostart
 
     
     def uninstall(self):
