@@ -119,10 +119,12 @@ class Software:
         return output
     
     def query_package(self, pkg):
-        output = self.cmd(["yay", "-Q", str(pkg)])
-        if pkg in output and "error" not in output:
-            return True
-        return False
+        try:
+            output = self.cmd(["yay", "-Q", str(pkg)])
+        except Exception as e:
+            eprint(pkg + " is not installed yet...")
+            return False
+        return True
 
     def query_packages(self, pkgs: list[str]) -> str:
         """
@@ -193,7 +195,15 @@ class Software:
         """
         if self.name == "backups":
             return
-        output = "[Desktop Entry]\n" + "Type=Application\n" + "Name=" + self.name + "\n" + "GenericName=" + self.generic_name + "\n" + "Icon=" + self.icon + "\n" + "Exec=" + self.run_cmd + "\n" + "Terminal=false"
+
+        output = f"""[Desktop Entry]
+Type=Application
+Name={self.name}
+GenericName={self.generic_name}
+Icon={self.icon}
+Exec={self.run_cmd}
+Terminal=false
+                """
 
         f = open(path, "w")
         f.write(output)

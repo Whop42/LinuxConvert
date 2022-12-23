@@ -53,7 +53,7 @@ class Install_Software:
                 print("Installing " + software.name + "...")
                 output = software.install()
                 software.create_desktop(os.path.expanduser(os.path.join("~/Desktop", str(software.name) + ".desktop")))
-                dprint(output.replace("\\n", "\n"))
+                # dprint(output.replace("\\n", "\n"))
                 print(name + " installed.")
             else:
                 application_name_list = []
