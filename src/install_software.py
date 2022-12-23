@@ -1,7 +1,9 @@
 import os
 import sys
 import json
-from utils import dprint, eprint, get_softwares, get_root_folder
+from utils import dprint, eprint, get_root_folder
+from software import Software
+from software.get_softwares import get_softwares
 import shutil
 
 class Install_Software:
@@ -51,7 +53,7 @@ class Install_Software:
                 print("Installing " + software.name + "...")
                 output = software.install()
                 software.create_desktop(os.path.expanduser(os.path.join("~/Desktop", str(software.name) + ".desktop")))
-                dprint(output.replace("\\n", "\n"))
+                # dprint(output.replace("\\n", "\n"))
                 print(name + " installed.")
             else:
                 application_name_list = []
