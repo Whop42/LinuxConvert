@@ -14,6 +14,7 @@ class flameshot(Software.Software):
     def install(self):
         output = self.install_package("flameshot")
         self.cmd(["flameshot", "-a true"]) # autostart
+        return output
 
     
     def uninstall(self):
