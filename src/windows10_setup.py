@@ -12,9 +12,11 @@ import software.Software
 import time
 import logging
 import utils
-from software.get_softwares import get_softwares
+import InfoManager
 
 logger: logging.Logger = logging.getLogger(__name__ + "::" + __file__)
+
+im = InfoManager.InfoManager()
 
 def main():
     if not "Windows" in platform.system():
@@ -40,7 +42,7 @@ def main():
 
     create_config(conf_path)
 
-    for s in get_softwares():
+    for s in im.softwares:
         get_config_from_software(s)
     
     dprint("zipping...")

@@ -3,14 +3,14 @@ import sys
 import json
 from utils import dprint, eprint, get_root_folder
 from software import Software
-from software.get_softwares import get_softwares
 import shutil
+import InfoManager
 
 class Install_Software:
     def __init__(self):
         self.applications = []
         self.config = {}
-        self.softwares = get_softwares()
+        self.im = InfoManager.InfoManager()
 
     def load_files(self, dir) -> dict:
         dprint("loading files from " + str(dir))
@@ -39,12 +39,13 @@ class Install_Software:
                     self.config = json.loads(config_file.read())
                     config_file.close()
                     dprint("dumped -config.json file")
+                    self.im.config = self.config
                     return
             eprint("couldn't find -config.json file")
             exit()
 
     def install(self, name):
-        for software in self.softwares:
+        for software in self.im.softwares:
             if software.name == name:
                 if software.check_install():
                     dprint(software.name + " is already installed. Skipping...")
@@ -52,15 +53,12 @@ class Install_Software:
                 
                 print("Installing " + software.name + "...")
                 output = software.install()
+
                 software.create_desktop(os.path.expanduser(os.path.join("~/Desktop", str(software.name) + ".desktop")))
-                # dprint(output.replace("\\n", "\n"))
+
+                self.im.installed_softwares.append(software.name)
                 print(name + " installed.")
-            else:
-                application_name_list = []
-                for application in self.applications:
-                    application_name_list.append(application[1])
-                if name not in application_name_list:
-                    dprint(name  +  " isn't in applications...")
+
             
     def install_from_list(self):
         for application in self.applications:
