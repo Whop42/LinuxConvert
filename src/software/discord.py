@@ -13,6 +13,12 @@ class discord(Software.Software):
         self.icon = "discord"
     
     def install(self):
+        if self.recommend(
+            "installing betterdiscord (a utility to customize discord with plugins and themes)",
+            "isn't very customizable"):
+            # TODO: install betterdiscord
+            pass
+
         return self.install_package("discord")
 
     
