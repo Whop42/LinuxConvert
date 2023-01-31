@@ -4,7 +4,9 @@ test-linuxconvert/
 test_stuff.py
 *.zip
 .history/
-
+tests/
+src/windows10-linuxconvert-*/
+install/
 
 ######################
 
@@ -138,6 +140,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-# project specific
-tests/test_software.py

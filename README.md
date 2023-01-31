@@ -47,8 +47,8 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
     - [X] Backup Documents, Pictures, etc.
         - [X] Make each of them a software
     - [ ] GUI
-- [_] Theme XFCE to appear similar to original OS, along with personalization settings
-- [_] Recommendation system for proprietary/bad software
+- [X] Theme XFCE to appear similar to original OS, along with personalization settings
+- [X] Recommendation system for proprietary/bad software
 - [ ] Create scripts to install popular applications w/configs
     - [ ] Firefox
     - [ ] Chromium
@@ -58,7 +58,7 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
         - [ ] Theme LibreOffice like MS Office
     - [ ] Zoom
     - [ ] Teams
-    - [ ] Discord
+    - [X] Discord, BetterDiscord
     - [ ] OBS
     - [ ] Steam
 - [ ] Create GUI for install

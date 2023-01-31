@@ -2,20 +2,19 @@ import software
 from software import Software, neofetch, flameshot, vscode, backups, discord, betterdiscord
 
 class InfoManager(object):
-    def __init__(self):
-        # list of possible softwares
-        self.softwares: list[Software.Software] = [
-            neofetch.neofetch(),
-            flameshot.flameshot(),
-            vscode.vscode(),
-            backups.backups(),
-            discord.discord(),
-            betterdiscord.betterdiscord()
-        ]
+    # list of possible softwares
+    softwares: list[Software.Software] = [
+        neofetch.neofetch(),
+        flameshot.flameshot(),
+        vscode.vscode(),
+        backups.backups(),
+        discord.discord(),
+        betterdiscord.betterdiscord()
+    ]
 
-        self.installed_softwares: list[str] = []
+    config: dict = {}
 
-        self.config = {}
+    installed_softwares: list[str] = []
 
     # singleton
     def __new__(cls):

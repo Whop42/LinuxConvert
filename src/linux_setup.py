@@ -3,10 +3,18 @@ from install_software import Install_Software
 import os
 import shutil
 import sys
-from utils import eprint, dprint
+from utils import eprint, dprint, cmd
+import utils
 import logging
+from InfoManager import InfoManager
+import requests
+import urllib
+import zipfile
 
 logger: logging.Logger = logging.getLogger(__name__ + "::" + __file__)
+
+install_software: Install_Software = Install_Software()
+im: InfoManager = InfoManager()
 
 def main() -> None:
     if not sys.argv[1]:
@@ -14,14 +22,11 @@ def main() -> None:
         exit()
 
     final_conf_path: str = unzip(sys.argv[1])
-    
-    install_software: Install_Software = Install_Software()
-    config: dict = install_software.load_files(final_conf_path)
-    logger.info("loaded config from " + final_conf_path)
+    install_software.load_files(final_conf_path)
+    config: dict = InfoManager.config
+    logger.info("loaded config from " + os.path.join(final_conf_path, "windows-config.json") + " (" + str(config) + ")")
 
     install_software.install_from_list()
-
-    config: dict = {"original_os": "assads"}
 
     theme(config)
 
@@ -55,7 +60,11 @@ def theme(config: dict) -> None:
 
     returns: nothing
     """
-    original_os: str = config["original_os"]
+    try:
+        original_os: str = config["original_os"]
+    except TypeError as e:
+        config["original_os"] = "???"
+        original_os: str = config["original_os"]
     if(original_os == "win10"):
         win10(config)
     elif(original_os == "win11"):
@@ -74,14 +83,61 @@ def theme(config: dict) -> None:
 
         theme(config)
 
+def download_zip(url: str, fdir: str, name: str) -> None:
+    zip_ = requests.get(url).content
+
+    zip_file = open(name, "wb")
+    with zip_file as f:
+        f.write(zip_)
+
+    cmd(['unzip', "-o", name, '-d', fdir], sudo=True)
+
+    fdir: str = os.path.expandvars(fdir)
+    os.remove(name)
+
+    dprint(f"downloaded {url} to {fdir}")
+
 def win10(conf: dict) -> None:
-    #install win10 lookalike theme
+    # download theme as zip
+    theme_name = "Windows-10-3.2.1"
+    boomerang_url: str = "https://github.com/B00merang-Project/Windows-10/archive/refs/tags/3.2.1.zip"
+    if conf["personalization"]["theme_mode"] == "dark":
+        theme_name = "Windows-10-3.2.1-Dark"
+        boomerang_url = "https://github.com/B00merang-Project/Windows-10-Dark/archive/refs/tags/3.2.1-dark.zip"
 
-    #move/add launchers to taskbar/panel
+    themes_dir = "/usr/share/themes"
+    name = "boomerang"
 
-    #set background image
+    download_zip(boomerang_url, themes_dir, name + ".zip")
 
-    #set lockscreen image
+    # install gtk theme in Xfce
+    utils.xfconf("xfwm4", "/general/theme", theme_name)
+    utils.xfconf("xsettings", "/Net/ThemeName", theme_name)
+
+    # icons
+    download_zip("https://github.com/B00merang-Artwork/Windows-10/archive/master.zip", "/usr/share/icons", "win10-icons")
+    utils.xfconf("xsettings", "/Net/IconThemeName", "Windows-10-master")
+
+    # cursors
+    utils.xfconf("xsettings", "/Gtk/CursorThemeName", "elementary")
+
+
+    taskbar(conf)
+    bkg_images(conf)
+
+def taskbar(conf: dict) -> None:
+    os.system("xfconf-query -c xfce4-panel -p /panels/panel-1/background-rgba -n -t double -t double -t double -t double -s 0 -s 0 -s 0 -s 1")
+
+    # move/add launchers to panel
+    # xfconf-query -c xfce4-panel -p /panels/panel-1/position
+    
+
+    pass
+
+def bkg_images(conf: dict) -> None:
+    # set background image
+
+    # set lockscreen image
     pass
 
 def win11(conf: dict) -> None:

@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-from utils import dprint, eprint, get_root_folder
+from utils import dprint, eprint, get_root_folder, test_im
 from software import Software
 import shutil
 import InfoManager
@@ -9,10 +9,13 @@ import InfoManager
 class Install_Software:
     def __init__(self):
         self.applications = []
-        self.config = {}
+        self.config: dict = {}
+
+        # original_os, personalization: theme_mode, background_image, lockscreen_image, panel_position, panel_height, accent_color
+
         self.im = InfoManager.InfoManager()
 
-    def load_files(self, dir) -> dict:
+    def load_files(self, dir) -> None:
         dprint("loading files from " + str(dir))
         for filename in os.listdir(dir):
             for application_folder in os.listdir(os.path.join(dir, "applications")): # for each application folder
@@ -32,16 +35,19 @@ class Install_Software:
                         eprint(application_file + " is not a valid application configuration")
             dprint("applications list: " + str(self.applications))
 
+            
+
             for f in os.listdir(dir):
                 # find the config file and dump it into self.config
-                if "-config.json" in f: 
+                if "windows-config.json" in f: 
                     config_file = open(os.path.join(dir, f))
+
                     self.config = json.loads(config_file.read())
                     config_file.close()
-                    dprint("dumped -config.json file")
-                    self.im.config = self.config
+                    InfoManager.InfoManager.config = self.config
+                    dprint("dumped windows-config.json file to InfoManager")
                     return
-            eprint("couldn't find -config.json file")
+            eprint("couldn't find windows-config.json file")
             exit()
 
     def install(self, name):

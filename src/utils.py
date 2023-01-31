@@ -5,6 +5,7 @@ from distutils.dir_util import copy_tree
 from distutils.file_util import copy_file as cp_file
 from distutils.errors import DistutilsFileError
 import logging
+import subprocess
 
 debug: bool = True
 
@@ -103,3 +104,36 @@ def copy_files(files, dest):
     for f in files:
         copy_file(f, os.path.join(dest, os.path.split(f)[1]))
         dprint(f"copied {f} to {dest}")
+
+
+def test_im():
+    import InfoManager
+    return InfoManager.InfoManager()
+
+def cmd(command: list[str], sudo: bool = False) -> str:
+        """
+        cmd runs a command
+
+        params:
+            list[str] command -> the command to run (main command followed by args)
+            bool sudo -> whether or not to run as sudo (default False)
+
+        returns:
+            str -> output of the command
+        
+        raises:
+            Exception -> command fails
+        """
+        if sudo:
+            command.insert(0, "sudo")
+        
+        output = subprocess.run(command, stdout=subprocess.PIPE)
+
+        # catch errors!
+        if output.returncode != 0:
+            raise Exception("command " + str(command) + " failed...")
+
+        return str(output.stdout)
+
+def xfconf(channel: str, prop: str, value) -> None:
+    os.system(f"xfconf-query -c {channel} -p {prop} -s {str(value)}")
