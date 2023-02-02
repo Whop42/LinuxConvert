@@ -136,7 +136,13 @@ def taskbar(conf: dict) -> None:
 
 def bkg_images(conf: dict) -> None:
     # set background image
+    file = InfoManager.config["personalization"]["background_image"]
 
+    final_path = os.path.expanduser(os.path.join("~/Pictures", file))
+    
+    utils.cmd(["cp", os.path.join(utils.get_root_folder(), file), final_path])
+    utils.xfconf("xfce4-desktop", "/backdrop/screen0/monitorVirtual1/workspace0/last-image", final_path)
+    dprint("set background image")
     # set lockscreen image
     pass
 

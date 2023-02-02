@@ -13,6 +13,8 @@ import time
 import logging
 import utils
 import InfoManager
+import ctypes, win32con
+
 
 logger: logging.Logger = logging.getLogger(__name__ + "::" + __file__)
 
@@ -29,12 +31,9 @@ def main():
     if "C:" not in original_wd:
         path: str = "C:\\LinuxConvert"
         try:
-            assert os.path.exists(path)
-            shutil.rmtree(path)
-            dprint("% s removed successfully..." % path)
-        except:
-            dprint(path + " doesn't exist...")
-        os.mkdir(path)
+            os.mkdir(path)
+        except OSError as e:
+            dprint(path + " couldn't be made... (" + e.strerror  + ")")
         utils.copy_dir(os.getcwd(), path)
         os.chdir(path)
 
@@ -76,7 +75,6 @@ def create_config(path: str):
         "personalization": {
             "theme_mode": get_theme_mode(),
             "background_image": get_background_image(),
-            "lockscreen_image": get_lockscreen_image(),
             "panel_position": panel_position,
             "panel_height": panel_height,
             "accent_color": get_accent_color(),
@@ -114,13 +112,19 @@ def get_accent_color() -> str:
     return f"#{accent}"
 
 def get_background_image() -> str:
-    # get wallpaper. TODO: Doesn't actually work yet
-    # registry = ConnectRegistry(None, HKEY_CURRENT_USER)
-    # key = OpenKey(
-    #     registry, r"\\Control Panel\\Desktop"
-    # )
-    # return QueryValueEx(key, "WallPaper")
-    return "background.jpg"
+    try:
+        ubuf = ctypes.create_unicode_buffer(512)
+        ctypes.windll.user32.SystemParametersInfoW(win32con.SPI_GETDESKWALLPAPER,len(ubuf),ubuf,0)
+        wallpaper = ubuf.value
+    except OSError as e:
+        # use default wallpaper
+        wallpaper = os.path.join(os.getcwd(), "media", "default_background.png")
+    
+    utils.copy_file(wallpaper, os.path.join(utils.get_root_folder(), os.path.split(wallpaper)[-1]))
+
+    dprint(f"got wallpaper: {wallpaper}")
+
+    return os.path.split(wallpaper)[-1]
 
 def get_panel_info() -> Tuple[str, int]:
     # get taskbar height + position
@@ -133,10 +137,6 @@ def get_panel_info() -> Tuple[str, int]:
     panel_position: str = "bottom" # TODO: find a way to get this
 
     return (panel_position, panel_height)
-
-def get_lockscreen_image() -> str:
-    # TODO: find how to do this (is it possible??)
-    return "lockscreen.jpg"
 
 def get_config_from_software(software: software.Software.Software):
     if software.check_windows():
