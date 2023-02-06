@@ -15,13 +15,15 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
 
 ### Linux:
 
-- Create a vm of the latest release of EndeavourOS with the offline install option
-- Update the system (`yay -Syyu && sudo grub-install`) <!-- delete this after the grub issue fixed -->
+- Create a VM (or hardware machine) of the latest release of EndeavourOS with the offline install option
+- Update the system (`yay -Syyu`)
 - Clone this repository
 - See below for running
 
 ### Windows:
 
+- Create a VM (or hardware machine) of windows 10
+- Set it up to your liking
 - Clone this repository
 - See below for running
 
@@ -29,11 +31,11 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
 
 ### Linux side:
 
-`sudo python linux_setup.py` in the directory with the config folder
+`python main.py /path-to-zip-file.zip/`
 
 ### Windows side:
 
-`python windows10_setup.py` in the directory where you want the config folder to generate
+`python main.py`
 
 ---
 ## Roadmap
@@ -44,9 +46,7 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
     - [X] Create config folder + config file
     - [X] Get system personalization options
     - [X] Update each Software to get windows configs
-    - [X] Backup Documents, Pictures, etc.
-        - [X] Make each of them a software
-    - [ ] GUI
+    - [ ] Backup Documents, Pictures, etc.
 - [X] Theme XFCE to appear similar to original OS, along with personalization settings
 - [X] Recommendation system for proprietary/bad software
 - [ ] Create scripts to install popular applications w/configs
@@ -61,6 +61,7 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
     - [X] Discord, BetterDiscord
     - [ ] OBS
     - [ ] Steam
-- [ ] Create GUI for install
+    - [ ] Wine
+    - [ ] Bottles
 - [ ] Make website with instructions for install
-- [ ] Create scripts to install more applications
+- [ ] Automate builds with PyInstaller

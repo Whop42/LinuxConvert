@@ -16,12 +16,12 @@ logger: logging.Logger = logging.getLogger(__name__ + "::" + __file__)
 install_software: Install_Software = Install_Software()
 im: InfoManager = InfoManager()
 
-def main() -> None:
-    if not sys.argv[1]:
-        logger.error("no CLI argument for zip file...")
+def main(zip_path) -> None:
+    if not zip_path:
+        logger.error("argument for zip file...")
         exit()
 
-    final_conf_path: str = unzip(sys.argv[1])
+    final_conf_path: str = unzip(zip_path)
     install_software.load_files(final_conf_path)
     config: dict = InfoManager.config
     logger.info("loaded config from " + os.path.join(final_conf_path, "windows-config.json") + " (" + str(config) + ")")
@@ -159,4 +159,4 @@ def win11(conf: dict) -> None:
 if __name__ == "__main__":
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-    main()
+    main(sys.argv[1])
