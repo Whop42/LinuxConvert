@@ -46,26 +46,40 @@ class Install_Software:
             eprint("couldn't find windows-config.json file")
             exit()
 
-    def install(self, name):
+    def get_soft_from_str(self, name):
         for software in self.im.softwares:
             if software.name == name:
-                if software.check_install():
-                    dprint(software.name + " is already installed. Skipping...")
-                    return
-                
-                print("Installing " + software.name + "...")
-                output = software.install()
+                return software
+        return False
 
-                software.create_desktop(os.path.expanduser(os.path.join("~/Desktop", str(software.name) + ".desktop")))
+    def install(self, name):
+        software = self.get_soft_from_str(name)
+        if not software:
+            eprint("could not install " + name)
+        if software.check_install():
+            dprint(software.name + " is already installed. Skipping...")
+            return
+        
+        print("Installing " + software.name + "...")
+        output = software.install()
 
-                self.im.installed_softwares.append(software.name)
-                print(name + " installed.")
+        software.create_desktop(os.path.expanduser(os.path.join("~/Desktop", str(software.name) + ".desktop")))
+
+        self.im.installed_softwares.append(software.name)
+        print(name + " installed.")
 
             
     def install_from_list(self):
+        
+        for application in self.im.applications:
+            # dprint(application)
+            self.install(application)
+        
         dprint("applications list: " + str(self.im.applications))
         for application in self.im.applications:
-            self.install(application)
+            software = self.get_soft_from_str(application)
+            if not software.check_install():
+                software.install(application)
 
     # def install_basics():
     #     print("Installing basic applications...")

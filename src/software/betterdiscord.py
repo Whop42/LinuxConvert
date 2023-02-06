@@ -15,9 +15,11 @@ class betterdiscord(Software.Software):
     
     def install(self):
         output = self.install_package("betterdiscordctl")
+        plugins_folder = os.path.join(self.get_config_folder(), "plugins")
 
         # if configs don't exist, make a basic install (repos)
-        if os.listdir(os.path.join(self.get_config_folder(), "plugins")) == []:
+        if not os.path.exists(plugins_folder):
+            os.makedirs(plugins_folder)
             # PluginRepo.plugin.js -> repo of plugins
             pr: requests.Response = requests.get("https://betterdiscord.app/Download?id=200")
             open(os.path.join(self.get_config_folder(), "Plugins", "PluginRepo.plugin.js")).write(pr.content)
@@ -25,8 +27,6 @@ class betterdiscord(Software.Software):
             # ThemeRepo.plugin.js -> repo of themes
             tr: requests.Response = requests.get("https://betterdiscord.app/Download?id=201")
             open(os.path.join(self.get_config_folder(), "Plugins", "ThemeRepo.plugin.js")).write(tr.content)
-        
-        self.cmd("betterdiscordctl install")
 
         # move configs
         self.move_configs("~/.config/BetterDiscord")
@@ -35,10 +35,10 @@ class betterdiscord(Software.Software):
 
     
     def uninstall(self):
-        return self.remove_package("flameshot")
+        return self.remove_package("betterdiscordctl")
     
     def check_install(self):
-        return self.query_package("flameshot")
+        return self.query_package("betterdiscordctl")
 
     def check_windows(self):
         return os.path.isdir(os.path.expandvars("C:\\Users\\$USERNAME\\AppData\\Roaming\\BetterDiscord"))

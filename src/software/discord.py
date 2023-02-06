@@ -1,5 +1,5 @@
 from software import Software, betterdiscord
-from utils import dprint, eprint
+from utils import dprint, eprint, get_root_folder
 import os
 import InfoManager
 
@@ -19,7 +19,8 @@ class discord(Software.Software):
                 "installing betterdiscord (a utility to customize discord with plugins and themes)",
                 "isn't very customizable"):
                 # TODO: install betterdiscord
-                InfoManager.InfoManager.applications.append(["betterdiscord", "betterdiscord"])
+                InfoManager.InfoManager.applications.append("betterdiscord")
+                os.mkdir(os.path.join(get_root_folder(), "betterdiscord"))
                 pass
 
         return self.install_package("discord")
