@@ -1,6 +1,7 @@
-from software import Software
+from software import Software, betterdiscord
 from utils import dprint, eprint
 import os
+import InfoManager
 
 class discord(Software.Software):
     
@@ -13,11 +14,13 @@ class discord(Software.Software):
         self.icon = "discord"
     
     def install(self):
-        if self.recommend(
-            "installing betterdiscord (a utility to customize discord with plugins and themes)",
-            "isn't very customizable"):
-            # TODO: install betterdiscord
-            pass
+        if "betterdiscord" not in InfoManager.InfoManager.applications:
+            if self.recommend(
+                "installing betterdiscord (a utility to customize discord with plugins and themes)",
+                "isn't very customizable"):
+                # TODO: install betterdiscord
+                InfoManager.InfoManager.applications.append(["betterdiscord", "betterdiscord"])
+                pass
 
         return self.install_package("discord")
 

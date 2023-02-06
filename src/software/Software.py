@@ -265,17 +265,19 @@ Terminal=false
         os.mkdir(self.get_config_folder())
     
     def recommend(self, alternative: str, reason: str) -> bool:
-        resp: str = input(self.name + " " + reason + " It is recommended to " + alternative + " Would you like to? (Y/n): ").lower()
+        # resp: str = input(self.name + " " + reason + " It is recommended to " + alternative + " Would you like to? (Y/n): ").lower()
         
         resp: str = input(
-f"""{self.name} {reason}.
+f"""===============================
+{self.name} {reason}
 
-LinuxConvert recommends {alternative}.
+LinuxConvert recommends {alternative}
 
-Would you like to do this? (type "n" to reject): 
+Would you like to do this? (Y/n): 
 """
         ).lower()
-
-        if resp == "n":
+        print("===============================")
+        if resp == "n" or resp == "no":
+            
             return False
         return True

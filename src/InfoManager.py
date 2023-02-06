@@ -12,6 +12,8 @@ class InfoManager(object):
         betterdiscord.betterdiscord()
     ]
 
+    applications: list[Software.Software] = []
+
     config: dict = {}
 
     installed_softwares: list[str] = []

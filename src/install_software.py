@@ -8,12 +8,9 @@ import InfoManager
 
 class Install_Software:
     def __init__(self):
-        self.applications = []
-        self.config: dict = {}
-
         # original_os, personalization: theme_mode, background_image, lockscreen_image, panel_position, panel_height, accent_color
 
-        self.im = InfoManager.InfoManager()
+        self.im = InfoManager.InfoManager
 
     def load_files(self, dir) -> None:
         dprint("loading files from " + str(dir))
@@ -28,23 +25,22 @@ class Install_Software:
                         json_str = json.loads(f.read())
 
                         # applications list format: folder name, real name
-                        self.applications.append([application_folder, json_str["name"]])
+                        self.im.applications.append(json_str["name"])
 
                         f.close()
                     except:
                         eprint(application_file + " is not a valid application configuration")
-            dprint("applications list: " + str(self.applications))
+            dprint("applications list: " + str(self.im.applications))
 
             
 
             for f in os.listdir(dir):
-                # find the config file and dump it into self.config
+                # find the config file and dump it into im.config
                 if "windows-config.json" in f: 
                     config_file = open(os.path.join(dir, f))
 
-                    self.config = json.loads(config_file.read())
+                    self.im.config = json.loads(config_file.read())
                     config_file.close()
-                    InfoManager.InfoManager.config = self.config
                     dprint("dumped windows-config.json file to InfoManager")
                     return
             eprint("couldn't find windows-config.json file")
@@ -67,8 +63,9 @@ class Install_Software:
 
             
     def install_from_list(self):
-        for application in self.applications:
-            self.install(application[1])
+        dprint("applications list: " + str(self.im.applications))
+        for application in self.im.applications:
+            self.install(application)
 
     # def install_basics():
     #     print("Installing basic applications...")
