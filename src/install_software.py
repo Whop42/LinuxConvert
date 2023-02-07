@@ -74,20 +74,3 @@ class Install_Software:
         for application in self.im.applications:
             # dprint(application)
             self.install(application)
-        
-        dprint("applications list: " + str(self.im.applications))
-        for application in self.im.applications:
-            software = self.get_soft_from_str(application)
-            if not software.check_install():
-                software.install(application)
-
-    # def install_basics():
-    #     print("Installing basic applications...")
-
-    #     basics = [
-    #         "neofetch", # because you can't show off linux without neofetch
-    #         "flameshot" # screenshot utility
-    #     ]
-
-    #     for software in basics:
-    #         install(software)
