@@ -13,31 +13,42 @@ class firefox(Software.Software):
         self.run_cmd = "/usr/bin/firefox"
         self.generic_name = "firefox"
         self.icon = "firefox"
-    
-    def install(self):
-        return self.install_package("firefox")
 
-    
-    def uninstall(self):
-        return self.remove_package("firefox")
-    
-    def check_install(self):
-        return self.query_package("firefox")
-
-    def check_windows(self):
-        if os.path.isdir(os.path.expandvars("C:\\Users\\$USERNAME\\AppData\\Local\\Discord")):
-            return True
-        return False
-        
     def find_profile(self, path: str):
         """
         finds the firefox profile in a dir
         """
 
         for d in os.listdir(path):
-            if len(os.listdir(os.path.join(path, d))) > 1:
-                return os.path.join(path, d)
+            if os.path.isdir(d):
+                print(d)
+                if len(os.listdir(os.path.join(path, d))) > 1:
+                    dprint("found firefox profile dir: " + d)
+                    return os.path.join(path, d)
         
+        return False
+    
+    def install(self):
+        if not self.query_package("firefox"):
+            self.install_package("firefox")
+        
+        if os.path.exists(self.get_config_folder()):
+            path = os.path.expanduser("~/.mozilla/firefox")
+
+            dprint("installing firefox profile to " + path)
+
+            self.move_configs(path)
+
+    
+    def uninstall(self):
+        return self.remove_package("firefox")
+    
+    def check_install(self):
+        return False
+
+    def check_windows(self):
+        if os.path.isdir(os.path.expandvars("C:\\Users\\$USERNAME\\AppData\\Local\\Discord")):
+            return True
         return False
     
     def get_config_windows(self):
