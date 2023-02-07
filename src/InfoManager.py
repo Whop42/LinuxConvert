@@ -1,5 +1,5 @@
 import software
-from software import Software, neofetch, flameshot, vscode, backups, discord, betterdiscord
+from software import Software, neofetch, flameshot, vscode, backups, discord, betterdiscord, firefox
 
 class InfoManager(object):
     # list of possible softwares
@@ -9,7 +9,8 @@ class InfoManager(object):
         vscode.vscode(),
         backups.backups(),
         discord.discord(),
-        betterdiscord.betterdiscord()
+        betterdiscord.betterdiscord(),
+        firefox.firefox()
     ]
 
     applications: list[Software.Software] = []
