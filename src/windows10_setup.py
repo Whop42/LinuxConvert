@@ -48,7 +48,7 @@ def main():
     zipfile = os.path.join(original_wd, "windows10-linuxconvert-" + time.strftime("%m-%d-%H-%M-%S"))
     shutil.make_archive(zipfile, "zip", conf_path, conf_path)
 
-    shutil.rmtree(conf_path)
+    # shutil.rmtree(conf_path)
         
     dprint(conf_path + " removed.")
     print(f"File created: {zipfile}")
