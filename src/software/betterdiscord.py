@@ -45,3 +45,6 @@ class betterdiscord(Software.Software):
 
     def get_config_windows(self):
         utils.copy_dir(os.path.expandvars("C:\\Users\\$USERNAME\\AppData\\Roaming\\BetterDiscord"), self.get_config_folder())
+
+    def create_desktop(self, path):
+        return

@@ -9,7 +9,7 @@ class flameshot(Software.Software):
 
         self.run_cmd = "flameshot gui"
         self.generic_name = "screenshot"
-        self.icon = "screengrab"
+        self.icon = "applets-screenshotter"
     
     def install(self):
         output = self.install_package("flameshot")
