@@ -11,6 +11,7 @@ import requests
 import urllib
 import zipfile
 
+
 logger: logging.Logger = logging.getLogger(__name__ + "::" + __file__)
 
 install_software: Install_Software = Install_Software()
@@ -74,9 +75,9 @@ def theme(config: dict) -> None:
     else:
         logger.error("config doesn't specify OS (may be corrupt)")
 
-        theme_choice: str = input("which theme would you like? (win10/win11/none) ")
+        theme_choice: str = input("which theme would you like? (win10/none) ")
 
-        if theme_choice.lower() in ["win10", "win11", "none"]:
+        if theme_choice.lower() in ["win10", "none"]:
             config["original_os"] = theme_choice.lower()
         else:
             print("invalid option...")
@@ -128,10 +129,16 @@ def win10(conf: dict) -> None:
 def taskbar(conf: dict) -> None:
     os.system("xfconf-query -c xfce4-panel -p /panels/panel-1/background-rgba -n -t double -t double -t double -t double -s 0 -s 0 -s 0 -s 1")
 
+    utils.cmd(["yay", "-Syyu", "--noconfirm", "xfce4-panel-profiles"])
+
+    utils.cmd(["xfce4-panel-profiles", "load", os.path.join(os.getcwd(), "src", "media", "lc-light.tar.bz2")])
+
     # move/add launchers to panel
     # xfconf-query -c xfce4-panel -p /panels/panel-1/position
-    
-
+    if conf["personalization"]["theme_mode"] == "dark":
+        os.system("xfconf-query -c xfce4-panel -p /panels/dark-mode -s true")
+    else:
+        os.system("xfconf-query -c xfce4-panel -p /panels/dark-mode -s false")
     pass
 
 def bkg_images(conf: dict) -> None:
