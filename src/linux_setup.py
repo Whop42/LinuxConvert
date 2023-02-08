@@ -139,7 +139,13 @@ def taskbar(conf: dict) -> None:
         os.system("xfconf-query -c xfce4-panel -p /panels/dark-mode -s true")
     else:
         os.system("xfconf-query -c xfce4-panel -p /panels/dark-mode -s false")
-    pass
+    
+    # change terminal color
+    terminalrc_path = os.path.expanduser("~/.config/xfce4/terminal/terminalrc")
+    if os.path.exists(terminalrc_path):
+        os.remove(terminalrc_path)
+    utils.copy_file(os.path.join(os.getcwd(), "src", "media", "terminalrc"), terminalrc_path)
+
 
 def bkg_images(conf: dict) -> None:
     # set background image
