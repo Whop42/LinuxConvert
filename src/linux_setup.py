@@ -103,7 +103,7 @@ def win10(conf: dict) -> None:
     theme_name = "Windows-10-3.2.1"
     boomerang_url: str = "https://github.com/B00merang-Project/Windows-10/archive/refs/tags/3.2.1.zip"
     if conf["personalization"]["theme_mode"] == "dark":
-        theme_name = "Windows-10-3.2.1-Dark"
+        theme_name = "Windows-10-Dark-3.2.1-dark"
         boomerang_url = "https://github.com/B00merang-Project/Windows-10-Dark/archive/refs/tags/3.2.1-dark.zip"
 
     themes_dir = "/usr/share/themes"
