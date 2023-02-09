@@ -46,16 +46,16 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
     - [X] Create config folder + config file
     - [X] Get system personalization options
     - [X] Update each Software to get windows configs
-    - [ ] Backup Documents, Pictures, etc.
+    - [X] Backup Documents, Pictures, etc.
 - [X] Theme XFCE to appear similar to original OS, along with personalization settings
 - [X] Recommendation system for proprietary/bad software
 - [ ] Create scripts to install popular applications w/configs
-    - [ ] Firefox
-    - [ ] Chromium
-    - [ ] Edge
+    - [X] Firefox
+    - [X] Chromium
+    - [X] Edge
     - [X] VSCode
-    - [ ] Office (LibreOffice or similar)
-        - [ ] Theme LibreOffice like MS Office
+    - [X] Office (LibreOffice or similar)
+        - [X] Theme LibreOffice like MS Office
     - [ ] Zoom
     - [ ] Teams
     - [X] Discord, BetterDiscord
