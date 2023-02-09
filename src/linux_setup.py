@@ -31,6 +31,8 @@ def main(zip_path) -> None:
 
     theme(config)
 
+    dprint("removing " + final_conf_path + "...")
+    shutil.rmtree(final_conf_path)
     logger.info("LinuxConvert install completed!")
 
 def unzip(zipfile: str) -> str:
