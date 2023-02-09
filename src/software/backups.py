@@ -12,15 +12,13 @@ class backups(Software.Software):
         self.name = "backups"
     
     def install(self):
-        self.move_configs("~/")
+        self.move_configs(os.path.expanduser("~/"))
         return "moved configs..."
     
     def uninstall(self):
         return
     
     def check_install(self):
-        if "Documents" in os.listdir(os.path.expanduser("~")):
-            return True
         return False
 
     def check_windows(self):
@@ -35,4 +33,4 @@ class backups(Software.Software):
         src_folder = os.path.expanduser("~")
         dst_folder = self.get_config_folder()
 
-        subprocess.call(f"robocopy {src_folder} {dst_folder} /xd \"AppData\" /s /COPY:D")
+        subprocess.call(f"robocopy {src_folder} {dst_folder} /xd \"AppData\" /xd \"Local Settings\" /xd \"Application Data\" /s /COPY:D")
