@@ -70,7 +70,5 @@ class Install_Software:
 
             
     def install_from_list(self):
-        
         for application in self.im.applications:
-            # dprint(application)
             self.install(application)

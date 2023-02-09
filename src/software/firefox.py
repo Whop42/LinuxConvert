@@ -54,4 +54,5 @@ class firefox(Software.Software):
     def get_config_windows(self):
         profiles_path = os.path.expandvars("C:\\Users\\$USERNAME\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles")
 
-        utils.copy_dir(self.find_profile(profiles_path), self.get_config_folder())
+        if self.find_profile(profiles_path):
+            utils.copy_dir(self.find_profile(profiles_path), self.get_config_folder())
