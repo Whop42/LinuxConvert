@@ -9,7 +9,7 @@ class google_chrome(Software.Software):
         super(Software.Software, self).__init__()
         self.name = "chrome"
 
-        self.run_cmd = "/usr/bin/google-chrome-stable"
+        self.run_cmd = "/usr/bin/google-chrome"
         self.generic_name = "chrome"
         self.icon = "google-chrome"
     
@@ -24,14 +24,14 @@ class google_chrome(Software.Software):
                 
 
         if install_chrome:
-            return self.install_package("google-chrome-stable")
+            return self.install_package("google-chrome")
 
     
     def uninstall(self):
-        return self.remove_package("google-chrome-stable")
+        return self.remove_package("google-chrome")
     
     def check_install(self):
-        return self.query_package("google-chrome-stable")
+        return self.query_package("google-chrome")
 
     def check_windows(self):
         if os.path.isdir(os.path.expandvars(r"C:\Program Files\Google\Chrome")):
