@@ -50,7 +50,7 @@ class Software:
     def install_packages(self, pkgs: list[str]) -> str:
         """
         install_packages installs a list of packages with yay
-
+yay -
         params:
             list[str] pkgs -> the list of packages
         
@@ -63,7 +63,8 @@ class Software:
         cmd: list[str] = ["yay", "-Syyu", "--noconfirm"]
 
         for pkg in pkgs:
-            cmd.append(pkg)
+            if not self.query_package(pkg):
+                cmd.append(pkg)
 
         try:
             output: str = self.cmd(cmd)
