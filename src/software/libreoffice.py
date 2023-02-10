@@ -3,6 +3,7 @@ from utils import dprint, eprint, get_root_folder
 import utils
 import os
 import InfoManager
+import requests
 
 class libreoffice(Software.Software):
     
@@ -29,6 +30,16 @@ class libreoffice(Software.Software):
             os.makedirs(os.path.expanduser("~/.config/libreoffice/4/user/"))
         utils.copy_file(cfg_path, os.path.expanduser("~/.config/libreoffice/4/user/registrymodifications.xcu"))
 
+        dict_url = "https://extensions.libreoffice.org/assets/downloads/41/1675249081/dict-en-20230201_lo.oxt"
+        f = open("dict.oxt", "wb")
+        f.write(requests.get(dict_url).content)
+        f.close()
+        os.system("libreoffice -o dict.oxt")
+        print("============================")
+        print("NOTE: close the libreoffice window after installing the dictionary")
+        print("============================")
+        os.remove("dict.oxt")
+
     
     def uninstall(self):
         return self.remove_package("libreoffice-fresh")
@@ -41,5 +52,5 @@ class libreoffice(Software.Software):
         return True
         
     def get_config_windows(self):
-        # no config
+        # no configlibreoff
         pass

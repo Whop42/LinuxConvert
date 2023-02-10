@@ -7,13 +7,14 @@ from typing import Tuple
 from win32api import GetMonitorInfo, MonitorFromPoint
 import darkdetect
 from winreg import ConnectRegistry, OpenKey, QueryValueEx, HKEY_CURRENT_USER
-from utils import dprint, debug
+from utils import dprint, eprint
 import software.Software
 import time
 import logging
 import utils
 import InfoManager
 import ctypes, win32con
+from send2trash import send2trash
 
 
 logger: logging.Logger = logging.getLogger(__name__ + "::" + __file__)
@@ -27,9 +28,9 @@ def main():
 
     original_wd: str = os.getcwd()
 
+    path: str = "C:\\LinuxConvert-" + time.strftime("%m-%d-%H-%M-%S")
     # i'm so, so, so sorry
     if "C:" not in original_wd:
-        path: str = "C:\\LinuxConvert"
         try:
             os.mkdir(path)
         except OSError as e:
@@ -48,9 +49,8 @@ def main():
     zipfile = os.path.join(original_wd, "windows10-linuxconvert-" + time.strftime("%m-%d-%H-%M-%S"))
     shutil.make_archive(zipfile, "zip", conf_path, conf_path)
 
-    # shutil.rmtree(conf_path)
-        
-    dprint(conf_path + " removed.")
+    #send2trash(path)
+
     print(f"File created: {zipfile}")
     print("Complete!")
 
