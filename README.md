@@ -56,12 +56,19 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
     - [X] VSCode
     - [X] Office (LibreOffice or similar)
         - [X] Theme LibreOffice like MS Office
-    - [ ] Zoom
-    - [ ] Teams
+    - [X] Zoom
+    - [X] Teams
     - [X] Discord, BetterDiscord
-    - [ ] OBS
-    - [ ] Steam
-    - [ ] Wine
-    - [ ] Bottles
+    - [X] OBS
+    - [X] Steam
+    - [X] Wine
+    - [X] Bottles
+    - [ ] Adobe Alternatives (Inkscape, GIMP, Shotcut/Kdenlive)
+    - [ ] Blender
+    - [ ] Epic Games
+    - [ ] VPNs (proton, nord, openvpn, etc)
+    - [ ] Tor
+    - [ ] ClamAV
+    - [ ] Virtualbox
 - [ ] Make website with instructions for install
 - [ ] Automate builds with PyInstaller
