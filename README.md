@@ -70,5 +70,6 @@ It's currently designed to install on EndeavourOS XFCE (offline install.)
     - [ ] Tor
     - [ ] ClamAV
     - [ ] Virtualbox
+    - [ ] IntelliJ, Eclipse, and jGRASP
 - [ ] Make website with instructions for install
 - [ ] Automate builds with PyInstaller
