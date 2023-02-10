@@ -26,3 +26,6 @@ class neofetch(Software.Software):
     def get_config_windows(self):
         # welcome to the rice fields, moth******er
         pass
+
+    def create_desktop(self, path):
+        pass
