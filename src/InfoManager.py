@@ -1,6 +1,6 @@
 import software
 from software import Software, neofetch, flameshot, vscode, backups, discord, betterdiscord, firefox, google_chrome, chromium, edge, libreoffice
-from software import teams, zoom, steam, obs, notion, anki, minecraft, spotify, bottles, okular, gimp, inkscape
+from software import teams, zoom, steam, obs, notion, anki, minecraft, spotify, bottles, okular, gimp, inkscape, kdenlive, vivaldi, opera
 class InfoManager(object):
     # list of possible softwares
     softwares: list[Software.Software] = [
@@ -26,7 +26,10 @@ class InfoManager(object):
         bottles.bottles(),
         okular.okular(),
         gimp.gimp(),
-        inkscape.inkscape()
+        inkscape.inkscape(),
+        kdenlive.kdenlive(),
+        vivaldi.vivaldi(),
+        opera.opera()
     ]
 
     applications: list[Software.Software] = []
