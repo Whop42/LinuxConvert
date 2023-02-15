@@ -33,4 +33,4 @@ class backups(Software.Software):
         src_folder = os.path.expanduser("~")
         dst_folder = self.get_config_folder()
 
-        subprocess.call(f"robocopy {src_folder} {dst_folder} /xd \"AppData\" /xd \"Local Settings\" /xd \"Application Data\" /s /COPY:D")
+        subprocess.call(f"robocopy {src_folder} {dst_folder} /xd \"AppData\" /xd \"Local Settings\" /xd \"Application Data\" /xd \"Start Menu\" /xd \"Recent\" /xd \"Cookies\" /s /COPY:D")
