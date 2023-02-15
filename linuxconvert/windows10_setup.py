@@ -41,9 +41,9 @@ def main():
         get_config_from_software(s)
     
     dprint("zipping...")
-    zip_file = os.path.join(original_wd, "windows10-linuxconvert-" + time.strftime("%m-%d-%H-%M-%S"))
+    zip_file = os.path.join(original_wd, "windows10-linuxconvert-" + time.strftime("%m-%d-%H-%M-%S") + ".zip")
     # shutil.make_archive(zip_file, "zip", conf_path, conf_path)
-    utils.cmd(["Compress-Archive", conf_path, zip_file])
+    utils.cmd(["tar.exe", "-acf", zip_file, conf_path])
 
     print(f"File created: {zip_file}")
     print("Complete!")
