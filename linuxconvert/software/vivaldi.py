@@ -31,6 +31,7 @@ class vivaldi(Software.Software):
         return False
     
     def get_config_windows(self):
-        profiles_path = os.path.expandvars("C:\\Users\\$USERNAME\\AppData\\Local\\Vivaldi\\User Data")
+        # profiles_path = os.path.expandvars("C:\\Users\\$USERNAME\\AppData\\Local\\Vivaldi\\User Data")
 
-        utils.copy_dir(profiles_path, self.get_config_folder())
+        # utils.copy_dir(profiles_path, self.get_config_folder())
+        pass

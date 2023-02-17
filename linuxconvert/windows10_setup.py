@@ -1,4 +1,5 @@
 import os
+import platform
 import sys
 import json
 import shutil
@@ -13,7 +14,7 @@ import logging
 import utils
 import InfoManager
 import ctypes, win32con
-import zipfile
+from send2trash import send2trash
 
 
 logger: logging.Logger = logging.getLogger(__name__ + "::" + __file__)
@@ -21,6 +22,10 @@ logger: logging.Logger = logging.getLogger(__name__ + "::" + __file__)
 im = InfoManager.InfoManager()
 
 def main():
+    if not "Windows" in platform.system():
+        print("Not running on windows. Stopping...")
+        return
+
     original_wd: str = os.getcwd()
 
     path: str = "C:\\LinuxConvert-" + time.strftime("%m-%d-%H-%M-%S")
@@ -41,11 +46,12 @@ def main():
         get_config_from_software(s)
     
     dprint("zipping...")
-    zip_file = os.path.join(original_wd, "windows10-linuxconvert-" + time.strftime("%m-%d-%H-%M-%S") + ".zip")
-    # shutil.make_archive(zip_file, "zip", conf_path, conf_path)
-    utils.cmd(["tar.exe", "-acf", zip_file, conf_path])
+    zipfile = os.path.join(original_wd, "windows10-linuxconvert-" + time.strftime("%m-%d-%H-%M-%S"))
+    shutil.make_archive(zipfile, "zip", conf_path, conf_path)
 
-    print(f"File created: {zip_file}")
+    #send2trash(path)
+
+    print(f"File created: {zipfile}")
     print("Complete!")
 
 def create_config(path: str):
