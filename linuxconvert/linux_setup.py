@@ -133,7 +133,7 @@ def taskbar(conf: dict) -> None:
 
     utils.cmd(["yay", "-Syyu", "--noconfirm", "xfce4-panel-profiles"])
 
-    utils.cmd(["xfce4-panel-profiles", "load", os.path.join(os.getcwd(), "src", "media", "lc-light.tar.bz2")])
+    utils.cmd(["xfce4-panel-profiles", "load", os.path.join(os.getcwd(), "linuxconvert", "media", "lc-light.tar.bz2")])
 
     # move/add launchers to panel
     # xfconf-query -c xfce4-panel -p /panels/panel-1/position
@@ -146,7 +146,7 @@ def taskbar(conf: dict) -> None:
     terminalrc_path = os.path.expanduser("~/.config/xfce4/terminal/terminalrc")
     if os.path.exists(terminalrc_path):
         os.remove(terminalrc_path)
-    utils.copy_file(os.path.join(os.getcwd(), "src", "media", "terminalrc"), terminalrc_path)
+    utils.copy_file(os.path.join(os.getcwd(), "linuxconvert", "media", "terminalrc"), terminalrc_path)
 
 
 def bkg_images(conf: dict) -> None:

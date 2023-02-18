@@ -22,9 +22,9 @@ class libreoffice(Software.Software):
                                 ])
         
         # move config to config folder
-        cfg_path = os.path.join(os.getcwd(), "src", "media", "light.xcu")
+        cfg_path = os.path.join(os.getcwd(), "linuxconvert", "media", "light.xcu")
         if InfoManager.InfoManager.config["personalization"]["theme_mode"] == "dark":
-            cfg_path = os.path.join(os.getcwd(), "src", "media", "dark.xcu")
+            cfg_path = os.path.join(os.getcwd(), "linuxconvert", "media", "dark.xcu")
         
         if not os.path.exists(os.path.expanduser("~/.config/libreoffice/4/user/")):
             os.makedirs(os.path.expanduser("~/.config/libreoffice/4/user/"))
