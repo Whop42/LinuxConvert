@@ -128,6 +128,7 @@ def win10(conf: dict) -> None:
     taskbar(conf)
     bkg_images(conf)
 
+
 def taskbar(conf: dict) -> None:
     os.system("xfconf-query -c xfce4-panel -p /panels/panel-1/background-rgba -n -t double -t double -t double -t double -s 0 -s 0 -s 0 -s 1")
 
@@ -147,6 +148,12 @@ def taskbar(conf: dict) -> None:
     if os.path.exists(terminalrc_path):
         os.remove(terminalrc_path)
     utils.copy_file(os.path.join(os.getcwd(), "linuxconvert", "media", "terminalrc"), terminalrc_path)
+
+    # change bash prompt
+    bashrc_path = os.path.expanduser("~/.bashrc")
+    with open(bashrc_path, "a") as bashrc:
+        bashrc.write(r"PS1='\[\e[0;1;38;5;34m\]\u \[\e[0m\](\[\e[0m\]\w\[\e[0m\]) \[\e[0m\]\$\[\e[0m\] '" + "\n")
+
 
 
 def bkg_images(conf: dict) -> None:
