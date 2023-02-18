@@ -1,6 +1,4 @@
-import stat
 from software import Software
-import shutil
 import utils
 import os
 import subprocess
