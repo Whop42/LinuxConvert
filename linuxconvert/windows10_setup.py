@@ -29,7 +29,6 @@ def main():
     original_wd: str = os.getcwd()
 
     path: str = "C:\\LinuxConvert-" + time.strftime("%m-%d-%H-%M-%S")
-    # i'm so, so, so sorry
     if "C:" not in original_wd:
         try:
             os.mkdir(path)
