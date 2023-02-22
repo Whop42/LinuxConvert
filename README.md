@@ -32,6 +32,15 @@ LinuxConvert is designed for the purposes of a scientific study. To join it, see
 - Clone this repository
 - `python main.py`
 
+## Features
+
+- Scrapes application info off of Windows into a .zip file
+- Takes `C:\Users\$USERNAME\` directory backups
+- Installs software from .zip file on EndeavourOS Linux
+- Configures Linux system to appear like Windows
+- Uses personalization settings from Windows on Linux
+- Enables the use of all this by simply running two commands
+
 ## List of Supported Software (and their packages)
 
 - Anki (anki-bin)
