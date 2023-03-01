@@ -77,8 +77,7 @@ def create_config(path: str):
             "panel_position": panel_position,
             "panel_height": panel_height,
             "accent_color": get_accent_color(),
-        },
-        # TODO: taskbar items
+        }
     }
 
     conf_file.write(json.dumps(config))

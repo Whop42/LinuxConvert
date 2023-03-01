@@ -52,21 +52,31 @@ class Install_Software:
                 return software
         return False
 
-    def install(self, name):
-        software = self.get_soft_from_str(name)
-        if not software:
-            eprint("could not install " + name)
-        if software.check_install():
+    """
+    install(name) installs a software from its name
+    params:
+        name: str -> the name of the software
+    """
+    def install(self, name: str) -> None:
+        # softwares are found by config file name
+        software: Software.Software = self.get_soft_from_str(name)
+
+        if not software: # software does not exist, therefore cannot be installed
+            eprint(name + " does not exist...")
+
+        if software.check_install(): # software is installed already
             dprint(software.name + " is already installed. Skipping...")
             return
         
-        print("Installing " + software.name + "...")
+        dprint("Installing " + software.name + "...")
         output = software.install()
 
+        # create a .desktop file for launching from desktop
         software.create_desktop(os.path.expanduser(os.path.join("~/Desktop", str(software.name) + ".desktop")))
 
         self.im.installed_softwares.append(software.name)
         print(name + " installed.")
+
 
             
     def install_from_list(self):

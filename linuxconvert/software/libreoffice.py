@@ -15,29 +15,43 @@ class libreoffice(Software.Software):
         self.generic_name = "office"
         self.icon = "applications-office"
     
+    """
+    installs libreoffice by...
+        - installing packages
+        - moving the configs
+        - downloading the spellcheck dictionary
+        - installing the spellcheck dictionary
+    """
     def install(self):
         self.install_packages(["libreoffice-fresh",
-                                "ttf-ms-fonts",
-                                "ttf-carlito"
+                                "ttf-ms-fonts", # default microsoft fonts
+                                "ttf-carlito" # calibri
                                 ])
         
-        # move config to config folder
-        cfg_path = os.path.join(os.getcwd(), "linuxconvert", "media", "light.xcu")
+        # find where default configs are stored
+        cfg_path = os.path.join(os.getcwd(), "linuxconvert", "media", "light.xcu") # if light mode
         if InfoManager.InfoManager.config["personalization"]["theme_mode"] == "dark":
-            cfg_path = os.path.join(os.getcwd(), "linuxconvert", "media", "dark.xcu")
+            cfg_path = os.path.join(os.getcwd(), "linuxconvert", "media", "dark.xcu") # if dark mode
         
+        # make sure the config folder exists
         if not os.path.exists(os.path.expanduser("~/.config/libreoffice/4/user/")):
             os.makedirs(os.path.expanduser("~/.config/libreoffice/4/user/"))
+        
+        # copy config
         utils.copy_file(cfg_path, os.path.expanduser("~/.config/libreoffice/4/user/registrymodifications.xcu"))
 
+        # download the dictionary
         dict_url = "https://extensions.libreoffice.org/assets/downloads/41/1675249081/dict-en-20230201_lo.oxt"
-        f = open("dict.oxt", "wb")
-        f.write(requests.get(dict_url).content)
-        f.close()
+        with open("dict.oxt", "wb") as f:
+            f.write(requests.get(dict_url).content)
+
+        # install dictionary by running libreoffice w/ it as an arg
         os.system("libreoffice -o dict.oxt")
-        print("============================")
-        print("NOTE: close the libreoffice window after installing the dictionary")
-        print("============================")
+        
+        # libreoffice opens a window from the above line, it must be closed to properly install
+        dprint("close the libreoffice window to continue...")
+
+        # remove the downloaded dict (it's already copied to libreoffice's files)
         os.remove("dict.oxt")
 
     
@@ -52,5 +66,5 @@ class libreoffice(Software.Software):
         return True
         
     def get_config_windows(self):
-        # no configlibreoff
+        # no config in windows
         pass
