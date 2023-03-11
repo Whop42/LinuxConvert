@@ -41,7 +41,9 @@ LinuxConvert is designed for the purposes of a scientific study. To join it, see
 - Uses personalization settings from Windows on Linux
 - Enables the use of all this by simply running two commands
 
-## List of Supported Software (and their packages)
+## Selected Supported Software (and their packages)
+
+> Does not include Windows applications that are only moved to OSS versions, personalization themes/icon themes/bash configs/some default applications that are installed as utilities
 
 - Anki (anki-bin)
 - BetterDiscord (betterdiscordctl)
