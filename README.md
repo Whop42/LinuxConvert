@@ -43,7 +43,7 @@ LinuxConvert is designed for the purposes of a scientific study. To join it, see
 
 ## Selected Supported Software (and their packages)
 
-> Does not include Windows applications that are only moved to OSS versions, personalization themes/icon themes/bash configs/some default applications that are installed as utilities
+> Does not include personalization themes/icon themes/bash configs/some default applications that are installed as utilities
 
 - Anki (anki-bin)
 - BetterDiscord (betterdiscordctl)
