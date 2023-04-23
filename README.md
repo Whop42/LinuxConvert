@@ -4,7 +4,7 @@
 [![Github All Releases](https://img.shields.io/github/downloads/whop42/LinuxConvert/total.svg?style=flat)]()
 [![GitHub commit activity the past week, 4 weeks](https://img.shields.io/github/commit-activity/w/whop42/LinuxConvert.svg?style=flat)]()
 
-> (CSRSEF Project)
+> (2nd place in Software category at Washington State Science and Engineering Fair 2023)
 
 Creates a personalized linux setup from a windows setup, with minimal user interaction.
 
