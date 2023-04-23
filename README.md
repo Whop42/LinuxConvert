@@ -12,10 +12,6 @@ To use, simply run `main.py` on Windows and move the .zip file over to Linux. Th
 
 It currently runs on EndeavourOS XFCE (offline install.)
 
-## Join the Study!
-
-LinuxConvert is designed for the purposes of a scientific study. To join it, see [here](https://linuxconvert.notion.site). This will be over by March 4th, 2023.
-
 ## Installation (For Testing/Development)
 
 ### Linux:
