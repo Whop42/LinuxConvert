@@ -6,64 +6,25 @@
 
 > (2nd place in Software category at Washington State Science and Engineering Fair 2023)
 
-Creates a personalized linux setup from a windows setup, with minimal user interaction.
+> ## ⚠️ CURRENTLY UNDERGOING A REWRITE ⚠️
+>
+> THIS VERSION WILL REPLACE THE OTHER ONE
 
-To use, simply run `main.py` on Windows and move the .zip file over to Linux. Then, run again with the .zip as an argument to `main.py`.
+---
 
-It currently runs on EndeavourOS XFCE (offline install.)
-
-## Installation (For Testing/Development)
-
-### Linux:
-
-- Create a VM (or hardware machine) of the latest release of EndeavourOS with the offline install option
-- Update the system (`yay -Syyu`)
-- Clone this repository
-- `python main.py /path-to-zip-file.zip/`
-
-### Windows:
-
-- Create a VM (or hardware machine) of windows 10
-- Set it up to your liking
-- Clone this repository
-- `python main.py`
-
-## Features
-
-- Scrapes application info off of Windows into a .zip file
-- Takes `C:\Users\$USERNAME\` directory backups
-- Installs software from .zip file on EndeavourOS Linux
-- Configures Linux system to appear like Windows
-- Uses personalization settings from Windows on Linux
-- Enables the use of all this by simply running two commands
-
-## Selected Supported Software (and their packages)
-
-> Does not include personalization themes/icon themes/bash configs/some default applications that are installed as utilities
-
-- Anki (anki-bin)
-- BetterDiscord (betterdiscordctl)
-- Bottles (bottles) + Wine
-- Chromium (chromium)
-- Discord (discord)
-- Microsoft Edge (microsoft-edge-stable-bin) (recommends Firefox)
-- Firefox (firefox)
-- Flameshot (flameshot)
-- GIMP (gimp) (replaces photo editor)
-- Google Chrome (google-chrome) (recommends Chromium)
-- Inkscape (inkscape) (replaces Adobe Illustrator)
-- Kdenlive (kdenlive) (replaces Adobe Premiere Pro)
-- LibreOffice (libreoffice-fresh) with English Dictionary + MS Office Theming
-- Minecraft Launcher (minecraft-launcher)
-- Neofetch (neofetch)
-- Notion (notion-app)
-- OBS Studio (obs-studio)
-- Okular (okular) (replaces PDF viewer)
-- Opera (opera) (including Opera GX)
-- Pamac (pamac-all)
-- Spotify (spotify-launcher)
-- Steam Runtime (steam) + Proton
-- Microsoft Teams (teams)
-- Vivaldi (vivaldi)
-- Visual Studio Code OSS (code + code-marketplace) (replaces vscode proprietary)
-- Zoom (zoom)
+Rewrite plans (partially based on WSSEF feedback <3):
+- [ ] Support Debian-based distros instead
+    - more stable, more software support
+    - resources for beginners
+    - large amount of distros under one pkgmngr means customization
+- [ ] Shift away from customizing personalizations a lot (will have to support multiple DEs/WMs)
+    - only light/dark mode?
+    - wallpaper
+    - taskbar?
+- [ ] Rewrite in a more organized format
+    - less boilerplate
+    - `Software` objects should be more alike, so they can be run piece-by-piece
+- [ ] GUI (because apparently users can't type)
+    - select software to install
+    - add in undetected software
+    - automate USB creation
