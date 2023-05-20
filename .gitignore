@@ -1,6 +1,7 @@
 ## PROJECT SPECIFIC ##
 *.zip
 windows10-linuxconvert-*/
+example-config/
 
 ######################
 
