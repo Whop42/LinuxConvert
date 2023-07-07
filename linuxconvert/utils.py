@@ -107,7 +107,7 @@ def copy_files(files, dest):
 
 
 def test_im():
-    import InfoManager
+    import linuxconvert.storage.InfoManager as InfoManager
     return InfoManager.InfoManager()
 
 def cmd(command: list[str], sudo: bool = False) -> str:

@@ -1,8 +1,8 @@
-from software import Software, betterdiscord
-from utils import dprint, eprint
-import utils
+from linuxconvert.software import Software, betterdiscord
+from linuxconvert.utils import dprint, eprint
+import linuxconvert.utils
 import os
-import InfoManager
+import linuxconvert.storage.InfoManager as InfoManager
 
 class vivaldi(Software.Software):
     

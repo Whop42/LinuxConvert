@@ -1,7 +1,7 @@
-from software import Software, betterdiscord
-from utils import dprint, eprint, get_root_folder
+from linuxconvert.software import Software, betterdiscord
+from linuxconvert.utils import dprint, eprint, get_root_folder
 import os
-import InfoManager
+import linuxconvert.storage.InfoManager as InfoManager
 
 class inkscape(Software.Software):
     

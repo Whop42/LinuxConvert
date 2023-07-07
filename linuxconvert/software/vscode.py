@@ -1,7 +1,7 @@
-from software import Software
+from linuxconvert.software import Software
 import os
 import shutil
-import utils
+import linuxconvert.utils
 
 class vscode(Software.Software):
     

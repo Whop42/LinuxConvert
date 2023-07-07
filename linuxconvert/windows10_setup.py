@@ -7,15 +7,21 @@ from typing import Tuple
 from win32api import GetMonitorInfo, MonitorFromPoint
 import darkdetect
 from winreg import ConnectRegistry, OpenKey, QueryValueEx, HKEY_CURRENT_USER
-from utils import dprint, eprint
-import software.Software
+from linuxconvert.utils import dprint, eprint
+import linuxconvert.software.Software
 import time
 import logging
-import utils
-import InfoManager
+import linuxconvert.utils
+import linuxconvert.storage.InfoManager as InfoManager
 import ctypes, win32con
 from send2trash import send2trash
 
+"""
+# NOTICE:
+this doesn't need to exist, i think.
+still taking code from it (for windows/windows.py) though.
+- @whop42, 7/6/23
+"""
 
 logger: logging.Logger = logging.getLogger(__name__ + "::" + __file__)
 

@@ -1,6 +1,6 @@
-from software import Software
+from linuxconvert.software import Software
 import os
-import utils
+import linuxconvert.utils
 import requests
 
 class betterdiscord(Software.Software):

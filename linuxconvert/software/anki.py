@@ -1,8 +1,8 @@
-from software import Software
-from utils import dprint, eprint, get_root_folder
-import utils
+from linuxconvert.software import Software
+from linuxconvert.utils import dprint, eprint, get_root_folder
+import linuxconvert.utils
 import os
-import InfoManager
+import linuxconvert.storage.InfoManager as InfoManager
 
 class anki(Software.Software):
     

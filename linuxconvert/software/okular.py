@@ -1,4 +1,4 @@
-from software import Software
+from linuxconvert.software import Software
 
 class okular(Software.Software):
     

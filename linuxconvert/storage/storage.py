@@ -1,11 +1,10 @@
 from io import TextIOWrapper
 import json
 import os, shutil
-from software import Software, SoftwareManager
+from linuxconvert.software import Software, SoftwareManager
 import time
 
 class Storage:
-
     path: str
     config: dict
     applications: list[Software.Software]
@@ -36,11 +35,14 @@ class Storage:
         """
         takes json data from path/config.json and puts it in self.config
 
-        throws: AssertionError if path/config.json isn't a file
+        throws:
+            AssertionError if path/config.json isn't a file
 
-        params: path (str) -> path to check for config.json in. usually self.path.
+        params:
+            path (str) -> path to check for config.json in. usually self.path.
 
-        outputs: changes self.config to json file contents
+        outputs:
+            changes self.config to json file contents
         """
 
         config_filepath: str = os.path.join(path, "config.json")
@@ -56,9 +58,11 @@ class Storage:
         """
         loads applications found in path to self.applications
 
-        throws: AssertionError if path/applications/ isn't a dir
+        throws:
+            AssertionError if path/applications/ isn't a dir
 
-        params: path (str) -> path to check for applications folder in
+        params:
+            path (str) -> path to check for applications folder in
         """
         applications_dir: str = os.path.join(path, "applications")
 
@@ -75,9 +79,14 @@ class Storage:
 
     def store(self, path: str, installed_software: list[Software.Software]) -> None:
         """
-        creates .zip with applications (+ configs) and config.json file
+        creates .zip with applications (+ configs and config.json) file from the list of installed software.
+        this is as a new .zip file WITHIN the path provided. the .zip will be named "linuxconvert-<time.time()>.zip".
 
-        ### only run on Windows!
+        params:
+            path (str) -> path to place .zip file in.
+
+
+        <<WINDOWS ONLY>>
         """
 
         if not os.path.isdir(path):
@@ -96,4 +105,24 @@ class Storage:
         os.mkdir(applications_dir)
 
         # get configs from each software TODO: update with GUI logging methods!
-        for software in 
+        for software in installed_software:
+            if software.check_windows():
+                software.storage = self
+                software.get_config_windows()
+
+    def get_application_folder(self, software: Software.Software) -> str:
+        """
+        returns the folder that a software should store its info in. if the folder doesn't exist,
+        it creates it with os.makedirs.
+
+        params:
+            software (Software) -> the software instance. needs to have an accessible name.
+
+        throws:
+            OSError if os.makedirs doesn't work
+        """
+
+        application_folder_path: str = os.path.join(self.path, "applications", software.name)
+        if not os.path.exists(application_folder_path):
+            os.makedirs(application_folder_path)
+        return application_folder_path

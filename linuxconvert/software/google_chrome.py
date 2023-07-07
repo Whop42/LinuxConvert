@@ -1,7 +1,7 @@
-from software import Software
-from utils import dprint, eprint, get_root_folder
+from linuxconvert.software import Software
+from linuxconvert.utils import dprint, eprint, get_root_folder
 import os
-import InfoManager
+import linuxconvert.storage.InfoManager as InfoManager
 
 class google_chrome(Software.Software):
     

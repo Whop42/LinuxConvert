@@ -1,4 +1,4 @@
-from software import SoftwareManager, Software
+from linuxconvert.software import SoftwareManager, Software
 
 sm: SoftwareManager.SoftwareManager = SoftwareManager.SoftwareManager()
 

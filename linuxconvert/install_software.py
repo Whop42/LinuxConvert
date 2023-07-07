@@ -1,10 +1,16 @@
 import os
 import sys
 import json
-from utils import dprint, eprint, get_root_folder, test_im
-from software import Software
+from linuxconvert.utils import dprint, eprint, get_root_folder, test_im
+from linuxconvert.software import Software
 import shutil
-import InfoManager
+import linuxconvert.storage.InfoManager as InfoManager
+
+"""
+# NOTICE:
+this doesn't need to exist, i think.
+- @whop42, 7/6/23
+"""
 
 class Install_Software:
     def __init__(self):

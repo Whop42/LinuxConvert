@@ -1,16 +1,17 @@
 import subprocess
-import utils
-from utils import dprint, eprint
+import linuxconvert.utils
+from linuxconvert.utils import dprint, eprint
 import shutil
 import json
 import os
+from storage import storage
 
 class Software:
     """
-    the base class for each software script supported
-
-    note: sets installed status to False as default
+    TODO: needs to be pretty much completely rewritten as of 5/23/23
     """
+
+    storage: storage.Storage
 
     def __init__(self):
         self.name = ""
@@ -21,6 +22,8 @@ class Software:
         self.icon = ""
 
         self.package_manager = "yay"
+
+        self.storage = storage.Storage("./trash")
 
     def cmd(self, command: list[str], sudo: bool = False) -> str:
         """
@@ -214,8 +217,7 @@ Terminal=false
         """
         returns full path of application folder
         """
-
-        return os.path.join(utils.locate_application_path(self.name))
+        return self.storage.get_application_folder(self)
 
     def get_config_folder(self):
         """

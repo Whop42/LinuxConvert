@@ -12,19 +12,31 @@
 
 ---
 
-Rewrite plans (partially based on WSSEF feedback <3):
+## Rewrite plans (partially based on WSSEF feedback <3):
+
+- [ ] Rewrite in a more organized format
+    - redo file structure
+    - storage system (module)
+    - structured windows/linux
+    - `Software` objects should be more alike, so they can be run piece-by-piece
+
 - [ ] Support Debian-based distros instead
     - more stable, more software support
     - resources for beginners
     - large amount of distros under one pkgmngr means customization
+
 - [ ] Shift away from customizing personalizations a lot (will have to support multiple DEs/WMs)
     - only light/dark mode?
     - wallpaper
     - taskbar?
-- [ ] Rewrite in a more organized format
-    - less boilerplate
-    - `Software` objects should be more alike, so they can be run piece-by-piece
-- [ ] GUI (because apparently users can't type)
+
+- [ ] GUI (because apparently users can't type smh)
     - select software to install
     - add in undetected software
-    - automate USB creation
+    - automate USB creation?
+
+---
+
+## Notes
+
+- 7/6/23: there's probably a lot of weird bugs w/ refactored things getting imported. good luck, future me that can run this all.

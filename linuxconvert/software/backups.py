@@ -1,5 +1,5 @@
-from software import Software
-import utils
+from linuxconvert.software import Software
+import linuxconvert.utils
 import os
 import subprocess
 

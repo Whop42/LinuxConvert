@@ -3,14 +3,20 @@ from install_software import Install_Software
 import os
 import shutil
 import sys
-from utils import eprint, dprint, cmd
-import utils
+from linuxconvert.utils import eprint, dprint, cmd
+import linuxconvert.utils
 import logging
-from InfoManager import InfoManager
+from linuxconvert.storage.InfoManager import linuxconvert.InfoManager as InfoManager
 import requests
 import urllib
 import zipfile
 
+"""
+# NOTICE:
+this doesn't need to exist, i think.
+still taking code from it (for linux/linux.py) though.
+- @whop42, 7/6/23
+"""
 
 logger: logging.Logger = logging.getLogger(__name__ + "::" + __file__)
 
