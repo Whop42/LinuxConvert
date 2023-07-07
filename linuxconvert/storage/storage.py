@@ -3,11 +3,12 @@ import json
 import os, shutil
 from linuxconvert.software import Software, SoftwareManager
 import time
+from InfoManager import InfoManager
 
 class Storage:
+    im: InfoManager
+
     path: str
-    config: dict
-    applications: list[Software.Software]
 
     def __init__(self, path: str):
         self.path = path
@@ -52,7 +53,7 @@ class Storage:
         config_file: TextIOWrapper = open(config_filepath)
 
         # TODO: write tests to make sure config file contains necessary options
-        self.config = json.load(config_file.read())
+        self.im.config = json.load(config_file.read())
 
     def load_applications(self, path: str) -> None:
         """
@@ -75,7 +76,7 @@ class Storage:
 
             for software in SoftwareManager.softwares:
                 if fn == software.name and software not in self.applications:
-                    self.applications.append(software)
+                    self.im.applications.append(software)
 
     def store(self, path: str, installed_software: list[Software.Software]) -> None:
         """

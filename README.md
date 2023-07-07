@@ -40,3 +40,4 @@
 ## Notes
 
 - 7/6/23: there's probably a lot of weird bugs w/ refactored things getting imported. good luck, future me that can run this all.
+- 7/6/23: the checking/installation/etc should be able to be run in chunks (ex. everything copies at once, everything installs at once)
