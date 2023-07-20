@@ -1,5 +1,0 @@
-py-wallpaper
-darkdetect
-pywin32
-requests
-platform

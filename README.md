@@ -6,13 +6,13 @@
 
 > (2nd place in Software category at Washington State Science and Engineering Fair 2023)
 
-> ## ⚠️ CURRENTLY UNDERGOING A REWRITE ⚠️
+> ## ⚠️ CURRENTLY UNDERGOING A COMPLETE GO REWRITE ⚠️
 >
-> THIS VERSION WILL REPLACE THE OTHER ONE
-
+> This version will replace the python version, eventually
+> Do not, under any circumstances, try to use this.
 ---
 
-## Rewrite plans (partially based on WSSEF feedback <3):
+## Rewrite plans (based on WSSEF feedback <3):
 
 - [ ] Rewrite in a more organized format
     - redo file structure
@@ -34,10 +34,3 @@
     - select software to install
     - add in undetected software
     - automate USB creation?
-
----
-
-## Notes
-
-- 7/6/23: there's probably a lot of weird bugs w/ refactored things getting imported. good luck, future me that can run this all.
-- 7/6/23: the checking/installation/etc should be able to be run in chunks (ex. everything copies at once, everything installs at once)
