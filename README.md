@@ -15,7 +15,7 @@
 ## Rewrite plans (based on WSSEF feedback <3):
 
 - [ ] Rewrite in a more organized format
-    - redo file structure
+    - use go!
     - storage system (module)
     - structured windows/linux
     - `Software` objects should be more alike, so they can be run piece-by-piece
