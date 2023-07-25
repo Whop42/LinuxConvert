@@ -55,7 +55,8 @@ func DeleteStorageDir() error {
 func ArchiveStorage() {
 	// create .zip file in the temporary dir
 	// (TODO: decide if this is the right way. maybe get users to decide for themselves?)
-	file, err := os.Create(path.Join(path.Dir(appStorage.Path), archiveName+".zip"))
+	archiveName := path.Join(path.Dir(appStorage.Path), archiveName+".zip")
+	file, err := os.Create(archiveName)
 	if err != nil {
 		panic(err)
 	}
@@ -70,7 +71,10 @@ func ArchiveStorage() {
 			return err
 		}
 		if info.IsDir() {
-			return nil
+			// add a trailing slash for creating dir
+			path = fmt.Sprintf("%s%c", path, os.PathSeparator)
+			_, err = w.Create(path)
+			return err
 		}
 		file, err := os.Open(path)
 		if err != nil {
@@ -94,7 +98,7 @@ func ArchiveStorage() {
 
 		return nil
 	}
-	err = filepath.Walk("input", walker)
+	err = filepath.Walk(appStorage.Path, walker)
 	if err != nil {
 		panic(err)
 	}
