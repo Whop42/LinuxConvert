@@ -6,7 +6,7 @@ func FindInstalledApplications() {
 	for _, app := range Applications {
 		installed, err := app.CheckInstalledWindows()
 		if err == nil && installed {
-			appStorage.InstalledApplications = append(appStorage.InstalledApplications, app)
+			AppStorage.InstalledApplications = append(AppStorage.InstalledApplications, app)
 		}
 	}
 }
@@ -14,14 +14,15 @@ func FindInstalledApplications() {
 // copies configs of installed apps
 // TODO: untested! must have applications to test.
 func CopyInstalledConfigs() {
-	for _, app := range appStorage.InstalledApplications {
+	for _, app := range AppStorage.InstalledApplications {
 		app.CopyConfigsWindows()
 	}
 }
 
 // what to run on windows
 func Windows() {
-	FindInstalledApplications()
-	CopyInstalledConfigs()
-	ArchiveStorage()
+	// FindInstalledApplications()
+	// CopyInstalledConfigs()
+	// ArchiveStorage()
+	DeleteStorageDir()
 }

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"github.com/whop42/LinuxConvert/gui"
 )
 
 func main() {
-	fmt.Println("Hello, LinuxConvert!")
+	gui.Windows()
 }
