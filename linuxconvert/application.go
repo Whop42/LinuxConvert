@@ -7,6 +7,7 @@ import (
 type Application interface {
 	CheckInstalledWindows() (bool, error)
 	CopyConfigsWindows() error
+	PreInstallLinux() error
 	GetPackageLinux() (Package, error)
 	InstallConfigsLinux() error
 	GetName() (string, error)
@@ -22,8 +23,7 @@ type Package struct {
 var Applications []Application = []Application{}
 
 func AssignApplications() {
-	Applications = append(Applications, &TestApp{})
-	Applications = append(Applications, &TestApp2{})
+	Applications = append(Applications, &VSCode{})
 }
 
 func FindApplicationByName(name string) (Application, error) {
@@ -51,64 +51,33 @@ func RemoveApplicationFromSlice(a Application, s []Application) (out []Applicati
 }
 
 // test application!! do not use!!
-type TestApp struct {
-	// fields here
-}
+// type TestApp struct {
+// 	// fields here
+// }
 
-func (a *TestApp) CheckInstalledWindows() (bool, error) {
-	return true, nil
-}
+// func (a *TestApp) CheckInstalledWindows() (bool, error) {
+// 	return true, nil
+// }
 
-func (a *TestApp) CopyConfigsWindows() error {
-	return nil
-}
+// func (a *TestApp) CopyConfigsWindows() error {
+// 	return nil
+// }
 
-func (a *TestApp) GetPackageLinux() (Package, error) {
-	return Package{
-		Name:           "test_app",
-		PackageManager: "flatpak",
-	}, nil
-}
+// func (a *TestApp) GetPackageLinux() (Package, error) {
+// 	return Package{
+// 		Name:           "test_app",
+// 		PackageManager: "flatpak",
+// 	}, nil
+// }
 
-func (a *TestApp) InstallConfigsLinux() error {
-	return nil
-}
+// func (a *TestApp) InstallConfigsLinux() error {
+// 	return nil
+// }
 
-func (a *TestApp) GetName() (string, error) {
-	return "test app1", nil
-}
+// func (a *TestApp) GetName() (string, error) {
+// 	return "test app1", nil
+// }
 
-func (a *TestApp) SetName(name string) error {
-	return nil
-}
-
-type TestApp2 struct {
-	// fields here
-}
-
-func (a *TestApp2) CheckInstalledWindows() (bool, error) {
-	return true, nil
-}
-
-func (a *TestApp2) CopyConfigsWindows() error {
-	return nil
-}
-
-func (a *TestApp2) GetPackageLinux() (Package, error) {
-	return Package{
-		Name:           "test_app2",
-		PackageManager: "flatpak",
-	}, nil
-}
-
-func (a *TestApp2) InstallConfigsLinux() error {
-	return nil
-}
-
-func (a *TestApp2) GetName() (string, error) {
-	return "test app2", nil
-}
-
-func (a *TestApp2) SetName(name string) error {
-	return nil
-}
+// func (a *TestApp) SetName(name string) error {
+// 	return nil
+// }
