@@ -12,11 +12,11 @@ import (
 	"time"
 )
 
-var archiveName = fmt.Sprintf("linuxconvert-%d", time.Now().Unix())
+var ArchiveName = fmt.Sprintf("linuxconvert-%d", time.Now().Unix())
 
 // global Storage object
 var AppStorage *Storage = &Storage{
-	Path:                  path.Join(os.TempDir(), archiveName),
+	Path:                  path.Join(os.TempDir(), ArchiveName),
 	InstalledApplications: []Application{},
 }
 
@@ -56,8 +56,8 @@ func DeleteStorageDir() error {
 func ArchiveStorage() {
 	// create .zip file in the temporary dir
 	// (TODO: decide if this is the right way. maybe get users to decide for themselves?)
-	archiveName := path.Join(path.Dir(AppStorage.Path), archiveName+".zip")
-	file, err := os.Create(archiveName)
+	ArchiveName := path.Join(path.Dir(AppStorage.Path), ArchiveName+".zip")
+	file, err := os.Create(ArchiveName)
 	if err != nil {
 		panic(err)
 	}
@@ -67,7 +67,7 @@ func ArchiveStorage() {
 	defer w.Close()
 
 	walker := func(path string, info os.FileInfo, err error) error {
-		fmt.Printf("Crawling: %#v\n", path)
+		fmt.Printf("Archiving: %#v\n", path)
 		if err != nil {
 			return err
 		}

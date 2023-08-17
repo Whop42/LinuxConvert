@@ -27,7 +27,7 @@ func TestArchiving(t *testing.T) {
 
 	ArchiveStorage()
 
-	expected := path.Join(path.Dir(AppStorage.Path), archiveName+".zip")
+	expected := path.Join(path.Dir(AppStorage.Path), ArchiveName+".zip")
 
 	var found bool = false
 	// check for expected in dir
@@ -54,9 +54,9 @@ func TestExtraction(t *testing.T) {
 
 	ArchiveStorage()
 
-	ExtractArchive(path.Join(path.Dir(AppStorage.Path), archiveName+".zip"))
+	ExtractArchive(path.Join(path.Dir(AppStorage.Path), ArchiveName+".zip"))
 
-	expected := path.Join(path.Dir(AppStorage.Path), archiveName)
+	expected := path.Join(path.Dir(AppStorage.Path), ArchiveName)
 
 	var found bool = false
 	// check for expected in dir
