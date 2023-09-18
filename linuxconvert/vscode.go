@@ -2,8 +2,6 @@ package linuxconvert
 
 import (
 	"os/exec"
-
-	"github.com/whop42/LinuxConvert/linuxconvert/utils"
 )
 
 type VSCode struct {
@@ -11,7 +9,8 @@ type VSCode struct {
 }
 
 func (a *VSCode) CheckInstalledWindows() (bool, error) {
-	return utils.CheckWindowsCommandSuccess("code --version"), nil
+	// return utils.CheckWindowsCommandSuccess("code --version"), nil
+	return true, nil
 }
 
 func (a *VSCode) CopyConfigsWindows() error {

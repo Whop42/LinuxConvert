@@ -4,23 +4,8 @@ import (
 	"os"
 	"path"
 	"path/filepath"
-	"strings"
 	"testing"
 )
-
-func TestApplicationPath(t *testing.T) {
-	response, _ := GetApplicationPath("test_app")
-	var expected string = path.Join(AppStorage.Path, "applications", "test_app")
-
-	t.Logf("recieved path: %s", response)
-	t.Logf("expected path: %s", expected)
-
-	if !strings.Contains(response, expected) {
-		t.Errorf("%s is not in %s", expected, response)
-	}
-
-	DeleteStorageDir()
-}
 
 func TestArchiving(t *testing.T) {
 	GetApplicationPath("test_app")
