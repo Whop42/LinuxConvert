@@ -1,4 +1,4 @@
-package linuxconvert
+package linux
 
 import apps "github.com/whop42/linuxconvert/applications"
 

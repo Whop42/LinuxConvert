@@ -1,4 +1,4 @@
-package linuxconvert
+package linux
 
 import (
 	"fmt"
