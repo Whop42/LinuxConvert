@@ -1,4 +1,4 @@
-package applications
+package linuxconvert
 
 import (
 	"fmt"
@@ -15,7 +15,7 @@ func TestCreateDesktopFile(t *testing.T) {
 		ExecPath:        "/path/to/executable",
 		Icon:            "test-icon",
 		ApplicationType: "Application",
-		Categories:      "Utility;",
+		Categories:      "Utility",
 	}
 
 	filePath, err := createDesktopFile(testDe, destDir)
@@ -24,7 +24,7 @@ func TestCreateDesktopFile(t *testing.T) {
 		t.Errorf("could not create .desktop file")
 	}
 
-	expectedContent := fmt.Sprintf("[Desktop Entry]\nName=%s\nGenericName=%s\nExec=%s\nIcon=%s\nType=%s\nCategories=%s",
+	expectedContent := fmt.Sprintf("[Desktop Entry]\nName=%s\nGenericName=%s\nExec=%s\nIcon=%s\nType=%s\nCategories=%s;",
 		testDe.Name, testDe.GenericName, testDe.ExecPath, testDe.Icon, testDe.ApplicationType, testDe.Categories)
 
 	fileContent, err := os.ReadFile(filePath)

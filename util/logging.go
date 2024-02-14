@@ -1,8 +1,9 @@
-package linuxconvert
+package util
 
 import (
 	"log"
 	"os"
+	"path/filepath"
 )
 
 var (
@@ -12,7 +13,8 @@ var (
 )
 
 func init() {
-	file, err := os.OpenFile("logs.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+	// TODO: find a better place to put logs
+	file, err := os.OpenFile(filepath.Join("..", "logs.txt"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}

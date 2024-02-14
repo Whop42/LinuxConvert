@@ -23,7 +23,7 @@ func Extract() error {
 // iterate over every folder in `supported-applications` and match it to an `Application` type,
 // then instantiate that with the information in the folder and store the object in a list that
 // is given to the install step
-func LoadApplications() ([]apps.SupportedApplication, error) {
+func LoadApplications() ([]apps.Application, error) {
 	return nil, nil
 }
 
@@ -35,6 +35,6 @@ func LoadApplications() ([]apps.SupportedApplication, error) {
 
 - call `createDesktopFile(dest)` on each that properly installed to create a .desktop file
 */
-func InstallApplications(installedApplications []apps.SupportedApplication) error {
+func InstallApplications(installedApplications []apps.Application) error {
 	return nil
 }
