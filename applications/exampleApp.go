@@ -18,6 +18,5 @@ func (a ExampleApplication) CopyConfigFiles() error {
 }
 
 func (a ExampleApplication) InstallLinux() error {
-	createDesktopFile("Example Application", "/usr/bin/cat", "Application", "Utility", "file")
 	return nil
 }
