@@ -11,8 +11,8 @@ import (
 )
 
 type WindowsState struct {
-	InstalledApplications, CollectedApplications []apps.Application
-	StorageDir                                   string
+	AvailableApplications, InstalledApplications, CollectedApplications []apps.Application
+	StorageDir                                                          string
 }
 
 /*
@@ -26,6 +26,7 @@ output:
 */
 func GenerateWindowsState() *WindowsState {
 	ws := WindowsState{
+		AvailableApplications: apps.GetSupportedApplications(), // debug purposes
 		InstalledApplications: make([]apps.Application, 0),
 		CollectedApplications: make([]apps.Application, 0),
 		StorageDir:            filepath.Join(os.TempDir(), "linuxconvert-"+fmt.Sprint(time.Now().Unix())),
@@ -34,7 +35,8 @@ func GenerateWindowsState() *WindowsState {
 	// ensure storage dir is created
 	os.MkdirAll(ws.StorageDir, os.ModeDir)
 
-	util.InfoLogger.Printf("Created Windows State: storage directory = %s", ws.StorageDir)
+	util.InfoLogger.Printf("created Windows State: storage directory = %s\n", ws.StorageDir)
+
 	return &ws
 }
 
@@ -45,21 +47,21 @@ output:
 - ws.InstalledApplications updated
 */
 func GetApplications(ws *WindowsState) {
-	//TODO: create test case
-
 	supportedApplications := apps.GetSupportedApplications()
 
 	for _, a := range supportedApplications {
 		installed, err := a.IsInstalledWindows() //TODO: concurrent method?
 		if installed {
 			ws.InstalledApplications = append(ws.InstalledApplications, a)
+			util.InfoLogger.Printf("%s found", a.GetApplicationInformation().Name)
 		}
 		if err != nil {
-			//TODO: handle error better
-			util.ErrorLogger.Printf("detecting of %s is installed", a.GetApplicationInformation().Name)
+			//TODO: handle error better: shouldn't just panic here
+			util.ErrorLogger.Panicf("detecting of %s installation status failed", a.GetApplicationInformation().Name)
 		}
 	}
 
+	util.InfoLogger.Printf("these installed applications were found: %s\n", fmt.Sprint(ws.InstalledApplications))
 	//TODO: unsupported applications system
 }
 
@@ -89,20 +91,23 @@ func CollectApplicationConfigs(ws *WindowsState) {
 	defer configJSON.Close()
 
 	// copy configs from supported applications
-	for _, app := range ws.InstalledApplications {
-		appDir := filepath.Join(applicationsPath, app.GetApplicationInformation().Name)
+	for _, a := range ws.InstalledApplications {
+		appDir := filepath.Join(applicationsPath, a.GetApplicationInformation().Name)
 		err = os.Mkdir(appDir, os.ModeDir)
 		if err != nil {
 			util.ErrorLogger.Panicf("couldn't create %s. err: %s\n", appDir, err)
 		}
 
-		err = app.CopyConfigFiles(appDir)
+		err = a.CopyConfigFiles(appDir)
 		if err != nil {
-			util.ErrorLogger.Panicf("couldn't copy config files from %s to %s\n", app.GetApplicationInformation().Name, appDir)
+			util.ErrorLogger.Panicf("couldn't copy config files from %s to %s\n", a.GetApplicationInformation().Name, appDir)
 		}
 
-		ws.CollectedApplications = append(ws.CollectedApplications, app)
+		ws.CollectedApplications = append(ws.CollectedApplications, a)
+		util.InfoLogger.Printf("%s configs collected", a.GetApplicationInformation().Name)
 	}
+
+	util.InfoLogger.Printf("copied config files for: %s\n", fmt.Sprint(ws.CollectedApplications))
 
 	//TODO: unsupported application system
 }
