@@ -17,7 +17,7 @@ func (a ExampleApplication) GetApplicationInformation() ApplicationInformation {
 }
 
 func (a ExampleApplication) IsInstalledWindows() (bool, error) {
-	return false, nil
+	return true, nil
 }
 
 func (a ExampleApplication) CopyConfigFiles(destDir string) error {
