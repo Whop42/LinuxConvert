@@ -2,11 +2,18 @@ package applications
 
 /*
 Example app for debug purposes
-Specify all of the info in a constructor
 */
 
 type ExampleApplication struct {
 	Application
+}
+
+func (a ExampleApplication) GetApplicationInformation() ApplicationInformation {
+	return ApplicationInformation{
+		Name:      "Example Application",
+		Developer: "whop42",
+		Icon:      "file",
+	}
 }
 
 func (a ExampleApplication) IsInstalledWindows() (bool, error) {

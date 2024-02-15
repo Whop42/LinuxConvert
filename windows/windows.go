@@ -49,10 +49,11 @@ func GetApplications(ws *WindowsState) {
 	for _, a := range supportedApplications {
 		installed, err := a.IsInstalledWindows() //TODO: concurrent method?
 		if installed {
-			installedApplications = append(installedApplications, a)
+			ws.InstalledApplications = append(ws.InstalledApplications, a)
 		}
 		if err != nil {
-			//TODO: handle error
+			//TODO: handle error better
+			util.ErrorLogger.Printf("detecting of %s is installed", a.GetApplicationInformation().Name)
 		}
 	}
 }
