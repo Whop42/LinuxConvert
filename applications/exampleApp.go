@@ -20,7 +20,7 @@ func (a ExampleApplication) IsInstalledWindows() (bool, error) {
 	return false, nil
 }
 
-func (a ExampleApplication) CopyConfigFiles() error {
+func (a ExampleApplication) CopyConfigFiles(destDir string) error {
 	return nil
 }
 

@@ -2,7 +2,7 @@ package applications
 
 type Application interface {
 	IsInstalledWindows() (bool, error)
-	CopyConfigFiles() error
+	CopyConfigFiles(string) error
 	InstallLinux() error
 	GetApplicationInformation() ApplicationInformation
 }
