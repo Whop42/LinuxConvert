@@ -49,7 +49,7 @@ func createDesktopFile(de DesktopEntry, destDir string) (string, error) {
 		return filename, err
 	}
 
-	util.InfoLogger.Printf("Desktop Entry %s created", filepath.Base(filename))
+	util.InfoLogger.Printf("Desktop Entry %s created\n", filepath.Base(filename))
 
 	return filename, nil
 }
