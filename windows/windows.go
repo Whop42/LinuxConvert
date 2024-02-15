@@ -1,6 +1,7 @@
 package windows
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"time"
@@ -23,15 +24,18 @@ output:
   - CollectedApplications: empty slice of Applications
   - StorageDir: <temp dir>/linuxconvert-<unix time>
 */
-func GenerateWindowsState() (*WindowsState, error) {
+func GenerateWindowsState() *WindowsState {
 	ws := WindowsState{
 		InstalledApplications: make([]apps.Application, 0),
 		CollectedApplications: make([]apps.Application, 0),
-		StorageDir:            filepath.Join(os.TempDir(), "linuxconvert-"+string(time.Now().Unix())),
+		StorageDir:            filepath.Join(os.TempDir(), "linuxconvert-"+fmt.Sprint(time.Now().Unix())),
 	}
 
+	// ensure storage dir is created
+	os.MkdirAll(ws.StorageDir, os.ModeDir)
+
 	util.InfoLogger.Printf("Created Windows State: storage directory = %s", ws.StorageDir)
-	return &ws, nil
+	return &ws
 }
 
 /*
@@ -60,4 +64,6 @@ func GetApplications(ws *WindowsState) {
 
 func CollectApplicationConfigs(ws *WindowsState) {
 	//TODO: implement
+
+	// create root directory structure
 }
